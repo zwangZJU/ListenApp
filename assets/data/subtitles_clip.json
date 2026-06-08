@@ -1,0 +1,2274 @@
+{
+  "videoOffset": 0,
+  "videoSource": "ted_full.mp4",
+  "subtitles": [
+    {
+      "id": 0,
+      "start": 0.873,
+      "end": 3.507,
+      "text": "As a student of adversity,"
+    },
+    {
+      "id": 1,
+      "start": 4.309,
+      "end": 9.617,
+      "text": "I've been struck over the years by how some people with major challenges"
+    },
+    {
+      "id": 2,
+      "start": 9.641,
+      "end": 11.979,
+      "text": "seem to draw strength from them."
+    },
+    {
+      "id": 3,
+      "start": 12.649,
+      "end": 16.586,
+      "text": "And I've heard the popular wisdom that that has to do with finding meaning."
+    },
+    {
+      "id": 4,
+      "start": 16.94,
+      "end": 18.401,
+      "text": "And for a long time,"
+    },
+    {
+      "id": 5,
+      "start": 18.425,
+      "end": 20.8,
+      "text": "I thought the meaning was out there,"
+    },
+    {
+      "id": 6,
+      "start": 20.824,
+      "end": 23.303,
+      "text": "some great truth waiting to be found."
+    },
+    {
+      "id": 7,
+      "start": 23.985,
+      "end": 25.535,
+      "text": "But over time,"
+    },
+    {
+      "id": 8,
+      "start": 25.64,
+      "end": 28.103,
+      "text": "I've come to feel that the truth is irrelevant."
+    },
+    {
+      "id": 9,
+      "start": 28.593,
+      "end": 30.776,
+      "text": "We call it \"finding meaning,\" 00:00:28.593 --> 00:00:30.776 We call it \"finding meaning,\""
+    },
+    {
+      "id": 10,
+      "start": 30.8,
+      "end": 34.102,
+      "text": "but we might better call it \"forging meaning.\""
+    },
+    {
+      "id": 11,
+      "start": 34.983,
+      "end": 37.928,
+      "text": "My last book was about how families manage to deal"
+    },
+    {
+      "id": 12,
+      "start": 37.952,
+      "end": 41.663,
+      "text": "with various kinds of challenging or unusual offspring."
+    },
+    {
+      "id": 13,
+      "start": 42.303,
+      "end": 44.47,
+      "text": "And one of the mothers I interviewed,"
+    },
+    {
+      "id": 14,
+      "start": 44.494,
+      "end": 47.457,
+      "text": "who had two children with multiple severe disabilities,"
+    },
+    {
+      "id": 15,
+      "start": 47.481,
+      "end": 52.178,
+      "text": "said to me, \"People always give us these little sayings like,"
+    },
+    {
+      "id": 16,
+      "start": 52.202,
+      "end": 55.118,
+      "text": "'God doesn't give you any more than you can handle.'"
+    },
+    {
+      "id": 17,
+      "start": 55.789,
+      "end": 60.216,
+      "text": "But children like ours are not preordained as a gift. 00:00:55.789 --> 00:01:00.216 But children like ours are not preordained as a gift."
+    },
+    {
+      "id": 18,
+      "start": 61.145,
+      "end": 62.296,
+      "text": "They're a gift"
+    },
+    {
+      "id": 19,
+      "start": 62.32,
+      "end": 65.045,
+      "text": "because that's what we have chosen.\""
+    },
+    {
+      "id": 20,
+      "start": 66.68,
+      "end": 70.28,
+      "text": "We make those choices all our lives."
+    },
+    {
+      "id": 21,
+      "start": 71.351,
+      "end": 73.395,
+      "text": "When I was in second grade,"
+    },
+    {
+      "id": 22,
+      "start": 73.419,
+      "end": 76.276,
+      "text": "Bobby Finkel had a birthday party"
+    },
+    {
+      "id": 23,
+      "start": 76.3,
+      "end": 79.573,
+      "text": "and invited everyone in our class but me."
+    },
+    {
+      "id": 24,
+      "start": 80.637,
+      "end": 83.131,
+      "text": "My mother assumed there had been some sort of error,"
+    },
+    {
+      "id": 25,
+      "start": 83.155,
+      "end": 84.793,
+      "text": "and she called Mrs. Finkel,"
+    },
+    {
+      "id": 26,
+      "start": 84.817,
+      "end": 89.428,
+      "text": "who said that Bobby didn't like me and didn't want me at his party. 00:01:30.022 --> 00:01:33.219 And that day, my mom took me to the zoo"
+    },
+    {
+      "id": 27,
+      "start": 93.243,
+      "end": 95.15,
+      "text": "and out for a hot fudge sundae."
+    },
+    {
+      "id": 28,
+      "start": 96.047,
+      "end": 97.951,
+      "text": "When I was in seventh grade,"
+    },
+    {
+      "id": 29,
+      "start": 97.975,
+      "end": 102.293,
+      "text": "one of the kids on my school bus nicknamed me \"Percy,\""
+    },
+    {
+      "id": 30,
+      "start": 102.317,
+      "end": 104.638,
+      "text": "as a shorthand for my demeanor."
+    },
+    {
+      "id": 31,
+      "start": 105.011,
+      "end": 110.059,
+      "text": "And sometimes, he and his cohort would chant that provocation"
+    },
+    {
+      "id": 32,
+      "start": 110.083,
+      "end": 112.113,
+      "text": "the entire school bus ride,"
+    },
+    {
+      "id": 33,
+      "start": 112.137,
+      "end": 115.75,
+      "text": "45 minutes up, 45 minutes back:"
+    },
+    {
+      "id": 34,
+      "start": 115.774,
+      "end": 119.739,
+      "text": "\"Percy! Percy! Percy! Percy!\" 00:02:00.572 --> 00:02:04.753 When I was in eighth grade, our science teacher told us"
+    },
+    {
+      "id": 35,
+      "start": 124.777,
+      "end": 128.801,
+      "text": "that all male homosexuals develop fecal incontinence"
+    },
+    {
+      "id": 36,
+      "start": 128.825,
+      "end": 131.937,
+      "text": "because of the trauma to their anal sphincter."
+    },
+    {
+      "id": 37,
+      "start": 133.294,
+      "end": 137.838,
+      "text": "And I graduated high school without ever going to the cafeteria,"
+    },
+    {
+      "id": 38,
+      "start": 137.941,
+      "end": 141.839,
+      "text": "where I would have sat with the girls and been laughed at for doing so,"
+    },
+    {
+      "id": 39,
+      "start": 141.863,
+      "end": 143.52,
+      "text": "or sat with the boys,"
+    },
+    {
+      "id": 40,
+      "start": 143.625,
+      "end": 147.454,
+      "text": "and been laughed at for being a boy who should be sitting with the girls."
+    },
+    {
+      "id": 41,
+      "start": 148.026,
+      "end": 153.073,
+      "text": "I survived that childhood through a mix of avoidance and endurance. 00:02:28.026 --> 00:02:33.073 I survived that childhood through a mix of avoidance and endurance."
+    },
+    {
+      "id": 42,
+      "start": 153.801,
+      "end": 155.555,
+      "text": "What I didn't know then"
+    },
+    {
+      "id": 43,
+      "start": 155.579,
+      "end": 157.055,
+      "text": "and do know now,"
+    },
+    {
+      "id": 44,
+      "start": 157.079,
+      "end": 162.556,
+      "text": "is that avoidance and endurance can be the entryway to forging meaning."
+    },
+    {
+      "id": 45,
+      "start": 164.366,
+      "end": 166.509,
+      "text": "After you've forged meaning,"
+    },
+    {
+      "id": 46,
+      "start": 166.533,
+      "end": 170.193,
+      "text": "you need to incorporate that meaning into a new identity."
+    },
+    {
+      "id": 47,
+      "start": 170.921,
+      "end": 172.777,
+      "text": "You need to take the traumas"
+    },
+    {
+      "id": 48,
+      "start": 172.801,
+      "end": 176.076,
+      "text": "and make them part of who you've come to be,"
+    },
+    {
+      "id": 49,
+      "start": 176.1,
+      "end": 179.088,
+      "text": "and you need to fold the worst events of your life"
+    },
+    {
+      "id": 50,
+      "start": 179.112,
+      "end": 181.213,
+      "text": "into a narrative of triumph, 00:02:59.112 --> 00:03:01.213 into a narrative of triumph,"
+    },
+    {
+      "id": 51,
+      "start": 181.32,
+      "end": 185.755,
+      "text": "evincing a better self in response to things that hurt."
+    },
+    {
+      "id": 52,
+      "start": 186.493,
+      "end": 190.795,
+      "text": "One of the other mothers I interviewed when I was working on my book"
+    },
+    {
+      "id": 53,
+      "start": 190.819,
+      "end": 193.144,
+      "text": "had been raped as an adolescent,"
+    },
+    {
+      "id": 54,
+      "start": 193.168,
+      "end": 196.08,
+      "text": "and had a child following that rape,"
+    },
+    {
+      "id": 55,
+      "start": 196.183,
+      "end": 199.063,
+      "text": "which had thrown away her career plans"
+    },
+    {
+      "id": 56,
+      "start": 199.087,
+      "end": 202.327,
+      "text": "and damaged all of her emotional relationships."
+    },
+    {
+      "id": 57,
+      "start": 203.073,
+      "end": 206.036,
+      "text": "But when I met her, she was 50,"
+    },
+    {
+      "id": 58,
+      "start": 206.06,
+      "end": 207.438,
+      "text": "and I said to her,"
+    },
+    {
+      "id": 59,
+      "start": 207.462,
+      "end": 210.208,
+      "text": "\"Do you often think about the man who raped you?\" 00:03:27.462 --> 00:03:30.208 \"Do you often think about the man who raped you?\""
+    },
+    {
+      "id": 60,
+      "start": 210.232,
+      "end": 214.196,
+      "text": "And she said, \"I used to think about him with anger,"
+    },
+    {
+      "id": 61,
+      "start": 214.908,
+      "end": 216.593,
+      "text": "but now only with pity.\""
+    },
+    {
+      "id": 62,
+      "start": 217.387,
+      "end": 220.02,
+      "text": "And I thought she meant pity because he was so unevolved"
+    },
+    {
+      "id": 63,
+      "start": 220.044,
+      "end": 222.12,
+      "text": "as to have done this terrible thing."
+    },
+    {
+      "id": 64,
+      "start": 222.576,
+      "end": 223.866,
+      "text": "And I said, \"Pity?\""
+    },
+    {
+      "id": 65,
+      "start": 224.343,
+      "end": 225.927,
+      "text": "And she said, \"Yes,"
+    },
+    {
+      "id": 66,
+      "start": 226.033,
+      "end": 231.068,
+      "text": "because he has a beautiful daughter and two beautiful grandchildren,"
+    },
+    {
+      "id": 67,
+      "start": 231.092,
+      "end": 232.566,
+      "text": "and he doesn't know that,"
+    },
+    {
+      "id": 68,
+      "start": 233.063,
+      "end": 234.281,
+      "text": "and I do."
+    },
+    {
+      "id": 69,
+      "start": 234.82,
+      "end": 236.12,
+      "text": "So as it turns out,"
+    },
+    {
+      "id": 70,
+      "start": 236.669,
+      "end": 238.14,
+      "text": "I'm the lucky one.\" 00:04:00.331 --> 00:04:03.166 Some of our struggles are things we're born to:"
+    },
+    {
+      "id": 71,
+      "start": 243.888,
+      "end": 248.841,
+      "text": "our gender, our sexuality, our race, our disability."
+    },
+    {
+      "id": 72,
+      "start": 249.507,
+      "end": 251.761,
+      "text": "And some are things that happen to us:"
+    },
+    {
+      "id": 73,
+      "start": 251.785,
+      "end": 255.359,
+      "text": "being a political prisoner, being a rape victim,"
+    },
+    {
+      "id": 74,
+      "start": 255.383,
+      "end": 257.062,
+      "text": "being a Katrina survivor."
+    },
+    {
+      "id": 75,
+      "start": 257.9,
+      "end": 260.789,
+      "text": "Identity involves entering a community"
+    },
+    {
+      "id": 76,
+      "start": 260.813,
+      "end": 262.952,
+      "text": "to draw strength from that community,"
+    },
+    {
+      "id": 77,
+      "start": 263.37,
+      "end": 265.303,
+      "text": "and to give strength there, too."
+    },
+    {
+      "id": 78,
+      "start": 265.981,
+      "end": 269.691,
+      "text": "It involves substituting \"and\" for \"but\" -- 00:04:30.207 --> 00:04:33.771 not \"I am here but I have cancer,\""
+    },
+    {
+      "id": 79,
+      "start": 274.275,
+      "end": 279.04,
+      "text": "but rather, \"I have cancer and I am here.\""
+    },
+    {
+      "id": 80,
+      "start": 279.952,
+      "end": 282.956,
+      "text": "When we're ashamed, we can't tell our stories,"
+    },
+    {
+      "id": 81,
+      "start": 283.476,
+      "end": 286.078,
+      "text": "and stories are the foundation"
+    },
+    {
+      "id": 82,
+      "start": 286.102,
+      "end": 287.325,
+      "text": "of identity."
+    },
+    {
+      "id": 83,
+      "start": 288.539,
+      "end": 290.187,
+      "text": "Forge meaning,"
+    },
+    {
+      "id": 84,
+      "start": 290.211,
+      "end": 291.61,
+      "text": "build identity."
+    },
+    {
+      "id": 85,
+      "start": 292.485,
+      "end": 295.443,
+      "text": "Forge meaning and build identity."
+    },
+    {
+      "id": 86,
+      "start": 296.058,
+      "end": 297.681,
+      "text": "That became my mantra."
+    },
+    {
+      "id": 87,
+      "start": 298.213,
+      "end": 301.182,
+      "text": "Forging meaning is about changing yourself. 00:04:58.213 --> 00:05:01.182 Forging meaning is about changing yourself."
+    },
+    {
+      "id": 88,
+      "start": 301.801,
+      "end": 304.96,
+      "text": "Building identity is about changing the world."
+    },
+    {
+      "id": 89,
+      "start": 305.619,
+      "end": 309.62,
+      "text": "All of us with stigmatized identities face this question daily:"
+    },
+    {
+      "id": 90,
+      "start": 310.096,
+      "end": 314.635,
+      "text": "How much to accommodate society by constraining ourselves,"
+    },
+    {
+      "id": 91,
+      "start": 314.659,
+      "end": 317.075,
+      "text": "and how much to break the limits"
+    },
+    {
+      "id": 92,
+      "start": 317.099,
+      "end": 319.49,
+      "text": "of what constitutes a valid life?"
+    },
+    {
+      "id": 93,
+      "start": 320.41,
+      "end": 323.49,
+      "text": "Forging meaning and building identity"
+    },
+    {
+      "id": 94,
+      "start": 323.514,
+      "end": 325.804,
+      "text": "does not make what was wrong right."
+    },
+    {
+      "id": 95,
+      "start": 326.499,
+      "end": 329.396,
+      "text": "It only makes what was wrong precious. 00:05:31.094 --> 00:05:33.197 In January of this year,"
+    },
+    {
+      "id": 96,
+      "start": 333.221,
+      "end": 337.283,
+      "text": "I went to Myanmar to interview political prisoners,"
+    },
+    {
+      "id": 97,
+      "start": 337.384,
+      "end": 341.474,
+      "text": "and I was surprised to find them less bitter than I'd anticipated."
+    },
+    {
+      "id": 98,
+      "start": 341.863,
+      "end": 344.403,
+      "text": "Most of them had knowingly committed the offenses"
+    },
+    {
+      "id": 99,
+      "start": 344.427,
+      "end": 346.244,
+      "text": "that landed them in prison,"
+    },
+    {
+      "id": 100,
+      "start": 346.268,
+      "end": 349.723,
+      "text": "and they had walked in with their heads held high,"
+    },
+    {
+      "id": 101,
+      "start": 349.747,
+      "end": 353.788,
+      "text": "and they walked out with their heads still held high,"
+    },
+    {
+      "id": 102,
+      "start": 353.812,
+      "end": 355.35,
+      "text": "many years later."
+    },
+    {
+      "id": 103,
+      "start": 355.897,
+      "end": 359.309,
+      "text": "Dr. Ma Thida, a leading human rights activist"
+    },
+    {
+      "id": 104,
+      "start": 359.333,
+      "end": 360.737,
+      "text": "who had nearly died in prison 00:05:59.333 --> 00:06:00.737 who had nearly died in prison"
+    },
+    {
+      "id": 105,
+      "start": 360.761,
+      "end": 363.791,
+      "text": "and had spent many years in solitary confinement,"
+    },
+    {
+      "id": 106,
+      "start": 363.815,
+      "end": 369.771,
+      "text": "told me she was grateful to her jailers for the time she had had to think,"
+    },
+    {
+      "id": 107,
+      "start": 369.795,
+      "end": 371.897,
+      "text": "for the wisdom she had gained,"
+    },
+    {
+      "id": 108,
+      "start": 371.921,
+      "end": 375.08,
+      "text": "for the chance to hone her meditation skills."
+    },
+    {
+      "id": 109,
+      "start": 375.861,
+      "end": 377.405,
+      "text": "She had sought meaning"
+    },
+    {
+      "id": 110,
+      "start": 377.429,
+      "end": 380.649,
+      "text": "and made her travail into a crucial identity."
+    },
+    {
+      "id": 111,
+      "start": 381.458,
+      "end": 385.299,
+      "text": "But if the people I met were less bitter than I'd anticipated"
+    },
+    {
+      "id": 112,
+      "start": 385.323,
+      "end": 386.86,
+      "text": "about being in prison,"
+    },
+    {
+      "id": 113,
+      "start": 386.884,
+      "end": 389.725,
+      "text": "they were also less thrilled than I'd expected"
+    },
+    {
+      "id": 114,
+      "start": 389.749,
+      "end": 392.813,
+      "text": "about the reform process going on in their country. 00:06:29.749 --> 00:06:32.813 about the reform process going on in their country."
+    },
+    {
+      "id": 115,
+      "start": 393.343,
+      "end": 394.932,
+      "text": "Ma Thida said,"
+    },
+    {
+      "id": 116,
+      "start": 394.956,
+      "end": 399.912,
+      "text": "\"We Burmese are noted for our tremendous grace under pressure,"
+    },
+    {
+      "id": 117,
+      "start": 399.936,
+      "end": 403.849,
+      "text": "but we also have grievance under glamour.\""
+    },
+    {
+      "id": 118,
+      "start": 404.587,
+      "end": 408.304,
+      "text": "She said, \"And the fact that there have been these shifts and changes"
+    },
+    {
+      "id": 119,
+      "start": 408.328,
+      "end": 412.165,
+      "text": "doesn't erase the continuing problems in our society"
+    },
+    {
+      "id": 120,
+      "start": 412.189,
+      "end": 415.96,
+      "text": "that we learned to see so well while we were in prison.\""
+    },
+    {
+      "id": 121,
+      "start": 416.385,
+      "end": 418.521,
+      "text": "I understood her to be saying"
+    },
+    {
+      "id": 122,
+      "start": 418.545,
+      "end": 422.072,
+      "text": "that concessions confer only a little humanity 00:06:58.545 --> 00:07:02.072 that concessions confer only a little humanity"
+    },
+    {
+      "id": 123,
+      "start": 422.096,
+      "end": 423.884,
+      "text": "where full humanity is due;"
+    },
+    {
+      "id": 124,
+      "start": 424.355,
+      "end": 428.013,
+      "text": "that crumbs are not the same as a place at the table."
+    },
+    {
+      "id": 125,
+      "start": 428.598,
+      "end": 429.918,
+      "text": "Which is to say,"
+    },
+    {
+      "id": 126,
+      "start": 429.942,
+      "end": 433.072,
+      "text": "you can forge meaning and build identity"
+    },
+    {
+      "id": 127,
+      "start": 433.096,
+      "end": 435.416,
+      "text": "and still be mad as hell."
+    },
+    {
+      "id": 128,
+      "start": 437.539,
+      "end": 439.18,
+      "text": "I've never been raped,"
+    },
+    {
+      "id": 129,
+      "start": 439.204,
+      "end": 443.67,
+      "text": "and I've never been in anything remotely approaching a Burmese prison."
+    },
+    {
+      "id": 130,
+      "start": 444.214,
+      "end": 446.047,
+      "text": "But as a gay American,"
+    },
+    {
+      "id": 131,
+      "start": 446.071,
+      "end": 449.609,
+      "text": "I've experienced prejudice and even hatred, 00:07:30.284 --> 00:07:31.864 and I've forged meaning"
+    },
+    {
+      "id": 132,
+      "start": 452.422,
+      "end": 454.624,
+      "text": "and I've built identity,"
+    },
+    {
+      "id": 133,
+      "start": 454.648,
+      "end": 456.972,
+      "text": "which is a move I learned from people"
+    },
+    {
+      "id": 134,
+      "start": 456.996,
+      "end": 460.934,
+      "text": "who had experienced far worse privation than I've ever known."
+    },
+    {
+      "id": 135,
+      "start": 462.082,
+      "end": 463.907,
+      "text": "In my own adolescence,"
+    },
+    {
+      "id": 136,
+      "start": 463.931,
+      "end": 466.581,
+      "text": "I went to extreme lengths to try to be straight."
+    },
+    {
+      "id": 137,
+      "start": 467.241,
+      "end": 471.458,
+      "text": "I enrolled myself in something called \"sexual surrogacy therapy,\""
+    },
+    {
+      "id": 138,
+      "start": 471.482,
+      "end": 475.144,
+      "text": "in which people I was encouraged to call doctors"
+    },
+    {
+      "id": 139,
+      "start": 475.168,
+      "end": 479.096,
+      "text": "prescribed what I was encouraged to call exercises"
+    },
+    {
+      "id": 140,
+      "start": 479.12,
+      "end": 482.13,
+      "text": "with women I was encouraged to call surrogates, 00:07:59.120 --> 00:08:02.130 with women I was encouraged to call surrogates,"
+    },
+    {
+      "id": 141,
+      "start": 482.685,
+      "end": 485.226,
+      "text": "who were not exactly prostitutes"
+    },
+    {
+      "id": 142,
+      "start": 485.25,
+      "end": 488.151,
+      "text": "but who were also not exactly anything else."
+    },
+    {
+      "id": 143,
+      "start": 488.175,
+      "end": 491.47,
+      "text": "(Laughter)"
+    },
+    {
+      "id": 144,
+      "start": 492.443,
+      "end": 496.656,
+      "text": "My particular favorite was a blonde woman from the Deep South"
+    },
+    {
+      "id": 145,
+      "start": 496.68,
+      "end": 500.707,
+      "text": "who eventually admitted to me that she was really a necrophiliac,"
+    },
+    {
+      "id": 146,
+      "start": 500.731,
+      "end": 503.51,
+      "text": "and had taken this job after she got in trouble"
+    },
+    {
+      "id": 147,
+      "start": 503.534,
+      "end": 504.983,
+      "text": "down at the morgue."
+    },
+    {
+      "id": 148,
+      "start": 505.007,
+      "end": 508.854,
+      "text": "(Laughter) 00:08:31.704 --> 00:08:34.683 These experiences eventually allowed me to have"
+    },
+    {
+      "id": 149,
+      "start": 514.707,
+      "end": 517.524,
+      "text": "some happy physical relationships with women,"
+    },
+    {
+      "id": 150,
+      "start": 517.548,
+      "end": 518.754,
+      "text": "for which I'm grateful."
+    },
+    {
+      "id": 151,
+      "start": 519.175,
+      "end": 521.063,
+      "text": "But I was at war with myself,"
+    },
+    {
+      "id": 152,
+      "start": 521.665,
+      "end": 525.187,
+      "text": "and I dug terrible wounds into my own psyche."
+    },
+    {
+      "id": 153,
+      "start": 526.544,
+      "end": 529.739,
+      "text": "We don't seek the painful experiences"
+    },
+    {
+      "id": 154,
+      "start": 529.763,
+      "end": 531.504,
+      "text": "that hew our identities,"
+    },
+    {
+      "id": 155,
+      "start": 532.066,
+      "end": 534.146,
+      "text": "but we seek our identities"
+    },
+    {
+      "id": 156,
+      "start": 534.17,
+      "end": 537.102,
+      "text": "in the wake of painful experiences."
+    },
+    {
+      "id": 157,
+      "start": 537.643,
+      "end": 540.412,
+      "text": "We cannot bear a pointless torment, 00:08:57.643 --> 00:09:00.412 We cannot bear a pointless torment,"
+    },
+    {
+      "id": 158,
+      "start": 540.529,
+      "end": 543.005,
+      "text": "but we can endure great pain"
+    },
+    {
+      "id": 159,
+      "start": 543.029,
+      "end": 545.076,
+      "text": "if we believe that it's purposeful."
+    },
+    {
+      "id": 160,
+      "start": 545.972,
+      "end": 548.436,
+      "text": "Ease makes less of an impression on us"
+    },
+    {
+      "id": 161,
+      "start": 548.46,
+      "end": 549.832,
+      "text": "than struggle."
+    },
+    {
+      "id": 162,
+      "start": 549.856,
+      "end": 552.578,
+      "text": "We could have been ourselves without our delights,"
+    },
+    {
+      "id": 163,
+      "start": 552.688,
+      "end": 556.843,
+      "text": "but not without the misfortunes that drive our search for meaning."
+    },
+    {
+      "id": 164,
+      "start": 557.728,
+      "end": 561.167,
+      "text": "\"Therefore, I take pleasure in infirmities,\""
+    },
+    {
+      "id": 165,
+      "start": 561.191,
+      "end": 563.832,
+      "text": "St. Paul wrote in Second Corinthians,"
+    },
+    {
+      "id": 166,
+      "start": 563.856,
+      "end": 567.106,
+      "text": "\"for when I am weak, then I am strong.\""
+    },
+    {
+      "id": 167,
+      "start": 568.09,
+      "end": 572.355,
+      "text": "In 1988, I went to Moscow to interview artists 00:09:28.090 --> 00:09:32.355 In 1988, I went to Moscow to interview artists"
+    },
+    {
+      "id": 168,
+      "start": 572.379,
+      "end": 574.023,
+      "text": "of the Soviet underground."
+    },
+    {
+      "id": 169,
+      "start": 574.047,
+      "end": 577.683,
+      "text": "I expected their work to be dissident and political."
+    },
+    {
+      "id": 170,
+      "start": 578.373,
+      "end": 580.474,
+      "text": "But the radicalism in their work"
+    },
+    {
+      "id": 171,
+      "start": 580.498,
+      "end": 584.334,
+      "text": "actually lay in reinserting humanity into a society"
+    },
+    {
+      "id": 172,
+      "start": 584.358,
+      "end": 586.948,
+      "text": "that was annihilating humanity itself,"
+    },
+    {
+      "id": 173,
+      "start": 586.972,
+      "end": 590.667,
+      "text": "as, in some senses, Russian society is now doing again."
+    },
+    {
+      "id": 174,
+      "start": 591.234,
+      "end": 593.798,
+      "text": "One of the artists I met said to me,"
+    },
+    {
+      "id": 175,
+      "start": 593.822,
+      "end": 597.398,
+      "text": "\"We were in training to be not artists but angels.\""
+    },
+    {
+      "id": 176,
+      "start": 598.129,
+      "end": 602.74,
+      "text": "In 1991, I went back to see the artists I'd been writing about, 00:09:58.129 --> 00:10:02.740 In 1991, I went back to see the artists I'd been writing about,"
+    },
+    {
+      "id": 177,
+      "start": 602.764,
+      "end": 606.652,
+      "text": "and I was with them during the putsch that ended the Soviet Union."
+    },
+    {
+      "id": 178,
+      "start": 607.09,
+      "end": 611.353,
+      "text": "And they were among the chief organizers of the resistance to that putsch."
+    },
+    {
+      "id": 179,
+      "start": 611.98,
+      "end": 615.376,
+      "text": "And on the third day of the putsch,"
+    },
+    {
+      "id": 180,
+      "start": 615.4,
+      "end": 618.237,
+      "text": "one of them suggested we walk up to Smolenskaya."
+    },
+    {
+      "id": 181,
+      "start": 618.613,
+      "end": 620.021,
+      "text": "And we went there,"
+    },
+    {
+      "id": 182,
+      "start": 620.045,
+      "end": 623.241,
+      "text": "and we arranged ourselves in front of one of the barricades,"
+    },
+    {
+      "id": 183,
+      "start": 623.265,
+      "end": 624.712,
+      "text": "and a little while later,"
+    },
+    {
+      "id": 184,
+      "start": 624.736,
+      "end": 626.411,
+      "text": "a column of tanks rolled up."
+    },
+    {
+      "id": 185,
+      "start": 626.895,
+      "end": 629.186,
+      "text": "And the soldier on the front tank said,"
+    },
+    {
+      "id": 186,
+      "start": 629.21,
+      "end": 633.024,
+      "text": "\"We have unconditional orders to destroy this barricade. 00:10:29.210 --> 00:10:33.024 \"We have unconditional orders to destroy this barricade."
+    },
+    {
+      "id": 187,
+      "start": 633.381,
+      "end": 636.015,
+      "text": "If you get out of the way, we don't need to hurt you."
+    },
+    {
+      "id": 188,
+      "start": 636.039,
+      "end": 639.431,
+      "text": "But if you won't move, we'll have no choice but to run you down.\""
+    },
+    {
+      "id": 189,
+      "start": 639.831,
+      "end": 642.877,
+      "text": "The artist I was with said, \"Give us just a minute."
+    },
+    {
+      "id": 190,
+      "start": 643.326,
+      "end": 646.75,
+      "text": "Give us just a minute to tell you why we're here.\""
+    },
+    {
+      "id": 191,
+      "start": 647.381,
+      "end": 649.471,
+      "text": "And the soldier folded his arms,"
+    },
+    {
+      "id": 192,
+      "start": 649.495,
+      "end": 654.07,
+      "text": "and the artist launched into a Jeffersonian panegyric to democracy"
+    },
+    {
+      "id": 193,
+      "start": 654.094,
+      "end": 657.849,
+      "text": "such as those of us who live in a Jeffersonian democracy"
+    },
+    {
+      "id": 194,
+      "start": 657.873,
+      "end": 660.346,
+      "text": "would be hard-pressed to present. 00:10:57.873 --> 00:11:00.346 would be hard-pressed to present."
+    },
+    {
+      "id": 195,
+      "start": 660.905,
+      "end": 662.82,
+      "text": "And they went on and on,"
+    },
+    {
+      "id": 196,
+      "start": 662.844,
+      "end": 664.254,
+      "text": "and the soldier watched."
+    },
+    {
+      "id": 197,
+      "start": 664.808,
+      "end": 668.072,
+      "text": "And then he sat there for a full minute after they were finished"
+    },
+    {
+      "id": 198,
+      "start": 668.096,
+      "end": 670.694,
+      "text": "and looked at us, so bedraggled in the rain,"
+    },
+    {
+      "id": 199,
+      "start": 670.718,
+      "end": 674.82,
+      "text": "and said, \"What you have said is true,"
+    },
+    {
+      "id": 200,
+      "start": 674.844,
+      "end": 677.519,
+      "text": "and we must bow to the will of the people."
+    },
+    {
+      "id": 201,
+      "start": 678.238,
+      "end": 680.847,
+      "text": "If you'll clear enough space for us to turn around,"
+    },
+    {
+      "id": 202,
+      "start": 680.871,
+      "end": 682.725,
+      "text": "we'll go back the way we came.\""
+    },
+    {
+      "id": 203,
+      "start": 683.272,
+      "end": 684.63,
+      "text": "And that's what they did."
+    },
+    {
+      "id": 204,
+      "start": 685.102,
+      "end": 690.076,
+      "text": "Sometimes, forging meaning can give you the vocabulary you need 00:11:25.102 --> 00:11:30.076 Sometimes, forging meaning can give you the vocabulary you need"
+    },
+    {
+      "id": 205,
+      "start": 690.1,
+      "end": 692.036,
+      "text": "to fight for your ultimate freedom."
+    },
+    {
+      "id": 206,
+      "start": 693.254,
+      "end": 696.09,
+      "text": "Russia awakened me to the lemonade notion"
+    },
+    {
+      "id": 207,
+      "start": 696.114,
+      "end": 698.644,
+      "text": "that oppression breeds the power to oppose it."
+    },
+    {
+      "id": 208,
+      "start": 698.995,
+      "end": 703.695,
+      "text": "And I gradually understood that as the cornerstone of identity."
+    },
+    {
+      "id": 209,
+      "start": 704.496,
+      "end": 708.044,
+      "text": "It took identity to rescue me from sadness."
+    },
+    {
+      "id": 210,
+      "start": 708.576,
+      "end": 710.851,
+      "text": "The gay rights movement posits a world"
+    },
+    {
+      "id": 211,
+      "start": 710.875,
+      "end": 713.248,
+      "text": "in which my aberrances are a victory."
+    },
+    {
+      "id": 212,
+      "start": 713.915,
+      "end": 716.818,
+      "text": "Identity politics always works on two fronts:"
+    },
+    {
+      "id": 213,
+      "start": 717.354,
+      "end": 721.933,
+      "text": "to give pride to people who have a given condition or characteristic, 00:11:57.354 --> 00:12:01.933 to give pride to people who have a given condition or characteristic,"
+    },
+    {
+      "id": 214,
+      "start": 721.957,
+      "end": 724.792,
+      "text": "and to cause the outside world to treat such people"
+    },
+    {
+      "id": 215,
+      "start": 724.816,
+      "end": 726.598,
+      "text": "more gently and more kindly."
+    },
+    {
+      "id": 216,
+      "start": 727.201,
+      "end": 730.458,
+      "text": "Those are two totally separate enterprises,"
+    },
+    {
+      "id": 217,
+      "start": 730.482,
+      "end": 733.878,
+      "text": "but progress in each sphere reverberates in the other."
+    },
+    {
+      "id": 218,
+      "start": 734.613,
+      "end": 737.64,
+      "text": "Identity politics can be narcissistic."
+    },
+    {
+      "id": 219,
+      "start": 738.29,
+      "end": 741.335,
+      "text": "People extol a difference only because it's theirs."
+    },
+    {
+      "id": 220,
+      "start": 741.849,
+      "end": 745.144,
+      "text": "People narrow the world and function in discrete groups"
+    },
+    {
+      "id": 221,
+      "start": 745.168,
+      "end": 746.927,
+      "text": "without empathy for one another."
+    },
+    {
+      "id": 222,
+      "start": 747.546,
+      "end": 751.493,
+      "text": "But properly understood and wisely practiced, 00:12:27.546 --> 00:12:31.493 But properly understood and wisely practiced,"
+    },
+    {
+      "id": 223,
+      "start": 751.517,
+      "end": 755.725,
+      "text": "identity politics should expand our idea of what it is to be human."
+    },
+    {
+      "id": 224,
+      "start": 756.223,
+      "end": 762.001,
+      "text": "Identity itself should be not a smug label or a gold medal,"
+    },
+    {
+      "id": 225,
+      "start": 762.617,
+      "end": 763.97,
+      "text": "but a revolution."
+    },
+    {
+      "id": 226,
+      "start": 764.848,
+      "end": 767.809,
+      "text": "I would have had an easier life if I were straight,"
+    },
+    {
+      "id": 227,
+      "start": 768.47,
+      "end": 769.697,
+      "text": "but I would not be me."
+    },
+    {
+      "id": 228,
+      "start": 770.182,
+      "end": 772.859,
+      "text": "And I now like being myself better"
+    },
+    {
+      "id": 229,
+      "start": 772.883,
+      "end": 774.993,
+      "text": "than the idea of being someone else,"
+    },
+    {
+      "id": 230,
+      "start": 775.017,
+      "end": 776.642,
+      "text": "someone who, to be honest,"
+    },
+    {
+      "id": 231,
+      "start": 776.666,
+      "end": 780.56,
+      "text": "I have neither the option of being nor the ability fully to imagine. 00:12:56.666 --> 00:13:00.560 I have neither the option of being nor the ability fully to imagine."
+    },
+    {
+      "id": 232,
+      "start": 781.257,
+      "end": 785.285,
+      "text": "But if you banish the dragons, you banish the heroes,"
+    },
+    {
+      "id": 233,
+      "start": 785.879,
+      "end": 789.658,
+      "text": "and we become attached to the heroic strain in our own lives."
+    },
+    {
+      "id": 234,
+      "start": 790.428,
+      "end": 791.805,
+      "text": "I've sometimes wondered"
+    },
+    {
+      "id": 235,
+      "start": 791.829,
+      "end": 794.588,
+      "text": "whether I could have ceased to hate that part of myself"
+    },
+    {
+      "id": 236,
+      "start": 794.612,
+      "end": 797.445,
+      "text": "without gay pride's technicolor fiesta,"
+    },
+    {
+      "id": 237,
+      "start": 797.469,
+      "end": 800.115,
+      "text": "of which this speech is one manifestation."
+    },
+    {
+      "id": 238,
+      "start": 800.139,
+      "end": 801.732,
+      "text": "(Laughter)"
+    },
+    {
+      "id": 239,
+      "start": 801.756,
+      "end": 804.689,
+      "text": "I used to think I would know myself to be mature"
+    },
+    {
+      "id": 240,
+      "start": 804.713,
+      "end": 807.143,
+      "text": "when I could simply be gay without emphasis."
+    },
+    {
+      "id": 241,
+      "start": 807.834,
+      "end": 811.636,
+      "text": "But the self-loathing of that period left a void, 00:13:27.834 --> 00:13:31.636 But the self-loathing of that period left a void,"
+    },
+    {
+      "id": 242,
+      "start": 811.66,
+      "end": 814.914,
+      "text": "and celebration needs to fill and overflow it,"
+    },
+    {
+      "id": 243,
+      "start": 814.938,
+      "end": 818.774,
+      "text": "and even if I repay my private debt of melancholy,"
+    },
+    {
+      "id": 244,
+      "start": 818.798,
+      "end": 821.689,
+      "text": "there's still an outer world of homophobia"
+    },
+    {
+      "id": 245,
+      "start": 821.713,
+      "end": 823.813,
+      "text": "that it will take decades to address."
+    },
+    {
+      "id": 246,
+      "start": 824.53,
+      "end": 827.798,
+      "text": "Someday, being gay will be a simple fact,"
+    },
+    {
+      "id": 247,
+      "start": 827.822,
+      "end": 830.123,
+      "text": "free of party hats and blame."
+    },
+    {
+      "id": 248,
+      "start": 830.678,
+      "end": 831.828,
+      "text": "But not yet."
+    },
+    {
+      "id": 249,
+      "start": 832.602,
+      "end": 836.775,
+      "text": "A friend of mine who thought gay pride was getting very carried away with itself,"
+    },
+    {
+      "id": 250,
+      "start": 836.799,
+      "end": 840.053,
+      "text": "once suggested that we organize Gay Humility Week. 00:13:56.799 --> 00:14:00.053 once suggested that we organize Gay Humility Week."
+    },
+    {
+      "id": 251,
+      "start": 840.077,
+      "end": 841.465,
+      "text": "(Laughter)"
+    },
+    {
+      "id": 252,
+      "start": 841.489,
+      "end": 845.586,
+      "text": "(Applause)"
+    },
+    {
+      "id": 253,
+      "start": 846.752,
+      "end": 847.943,
+      "text": "It's a great idea."
+    },
+    {
+      "id": 254,
+      "start": 847.967,
+      "end": 849.331,
+      "text": "(Laughter)"
+    },
+    {
+      "id": 255,
+      "start": 849.355,
+      "end": 851.182,
+      "text": "But its time has not yet come."
+    },
+    {
+      "id": 256,
+      "start": 851.206,
+      "end": 853.167,
+      "text": "(Laughter)"
+    },
+    {
+      "id": 257,
+      "start": 853.551,
+      "end": 858.569,
+      "text": "And neutrality, which seems to lie halfway between despair and celebration,"
+    },
+    {
+      "id": 258,
+      "start": 858.593,
+      "end": 860.285,
+      "text": "is actually the endgame."
+    },
+    {
+      "id": 259,
+      "start": 861.388,
+      "end": 863.831,
+      "text": "In 29 states in the US,"
+    },
+    {
+      "id": 260,
+      "start": 864.211,
+      "end": 867.356,
+      "text": "I could legally be fired or denied housing"
+    },
+    {
+      "id": 261,
+      "start": 867.38,
+      "end": 868.705,
+      "text": "for being gay."
+    },
+    {
+      "id": 262,
+      "start": 869.352,
+      "end": 872.095,
+      "text": "In Russia, the anti-propaganda law 00:14:29.352 --> 00:14:32.095 In Russia, the anti-propaganda law"
+    },
+    {
+      "id": 263,
+      "start": 872.119,
+      "end": 874.735,
+      "text": "has led to people being beaten in the streets."
+    },
+    {
+      "id": 264,
+      "start": 875.316,
+      "end": 880.167,
+      "text": "Twenty-seven African countries have passed laws against sodomy."
+    },
+    {
+      "id": 265,
+      "start": 880.191,
+      "end": 883.927,
+      "text": "And in Nigeria, gay people can legally be stoned to death,"
+    },
+    {
+      "id": 266,
+      "start": 883.951,
+      "end": 885.894,
+      "text": "and lynchings have become common."
+    },
+    {
+      "id": 267,
+      "start": 886.578,
+      "end": 888.652,
+      "text": "In Saudi Arabia recently,"
+    },
+    {
+      "id": 268,
+      "start": 888.676,
+      "end": 891.549,
+      "text": "two men who had been caught in carnal acts"
+    },
+    {
+      "id": 269,
+      "start": 891.573,
+      "end": 896.089,
+      "text": "were sentenced to 7,000 lashes each,"
+    },
+    {
+      "id": 270,
+      "start": 896.113,
+      "end": 898.672,
+      "text": "and are now permanently disabled as a result."
+    },
+    {
+      "id": 271,
+      "start": 899.337,
+      "end": 901.56,
+      "text": "So who can forge meaning 00:14:59.337 --> 00:15:01.560 So who can forge meaning"
+    },
+    {
+      "id": 272,
+      "start": 901.584,
+      "end": 903.094,
+      "text": "and build identity?"
+    },
+    {
+      "id": 273,
+      "start": 904.118,
+      "end": 907.593,
+      "text": "Gay rights are not primarily marriage rights,"
+    },
+    {
+      "id": 274,
+      "start": 907.617,
+      "end": 910.688,
+      "text": "and for the millions who live in unaccepting places"
+    },
+    {
+      "id": 275,
+      "start": 910.712,
+      "end": 912.557,
+      "text": "with no resources,"
+    },
+    {
+      "id": 276,
+      "start": 912.581,
+      "end": 914.399,
+      "text": "dignity remains elusive."
+    },
+    {
+      "id": 277,
+      "start": 915.106,
+      "end": 917.686,
+      "text": "I am lucky to have forged meaning"
+    },
+    {
+      "id": 278,
+      "start": 918.261,
+      "end": 919.741,
+      "text": "and built identity,"
+    },
+    {
+      "id": 279,
+      "start": 920.438,
+      "end": 922.321,
+      "text": "but that's still a rare privilege."
+    },
+    {
+      "id": 280,
+      "start": 922.821,
+      "end": 925.524,
+      "text": "And gay people deserve more, collectively,"
+    },
+    {
+      "id": 281,
+      "start": 925.548,
+      "end": 927.876,
+      "text": "than the crumbs of justice."
+    },
+    {
+      "id": 282,
+      "start": 928.714,
+      "end": 930.117,
+      "text": "And yet, 00:15:28.714 --> 00:15:30.117 And yet,"
+    },
+    {
+      "id": 283,
+      "start": 930.141,
+      "end": 932.933,
+      "text": "every step forward is so sweet."
+    },
+    {
+      "id": 284,
+      "start": 933.815,
+      "end": 937.684,
+      "text": "In 2007, six years after we met,"
+    },
+    {
+      "id": 285,
+      "start": 937.708,
+      "end": 940.536,
+      "text": "my partner and I decided to get married."
+    },
+    {
+      "id": 286,
+      "start": 941.311,
+      "end": 945.315,
+      "text": "Meeting John had been the discovery of great happiness"
+    },
+    {
+      "id": 287,
+      "start": 945.339,
+      "end": 948.207,
+      "text": "and also the elimination of great unhappiness."
+    },
+    {
+      "id": 288,
+      "start": 948.707,
+      "end": 953.772,
+      "text": "And sometimes, I was so occupied with the disappearance of all that pain,"
+    },
+    {
+      "id": 289,
+      "start": 953.796,
+      "end": 955.561,
+      "text": "that I forgot about the joy,"
+    },
+    {
+      "id": 290,
+      "start": 956.148,
+      "end": 958.945,
+      "text": "which was at first the less remarkable part of it to me."
+    },
+    {
+      "id": 291,
+      "start": 959.764,
+      "end": 962.371,
+      "text": "Marrying was a way to declare our love 00:15:59.764 --> 00:16:02.371 Marrying was a way to declare our love"
+    },
+    {
+      "id": 292,
+      "start": 962.395,
+      "end": 965.322,
+      "text": "as more a presence than an absence."
+    },
+    {
+      "id": 293,
+      "start": 966.451,
+      "end": 968.41,
+      "text": "Marriage soon led us to children,"
+    },
+    {
+      "id": 294,
+      "start": 968.839,
+      "end": 970.381,
+      "text": "and that meant new meanings"
+    },
+    {
+      "id": 295,
+      "start": 970.775,
+      "end": 973.706,
+      "text": "and new identities -- ours and theirs."
+    },
+    {
+      "id": 296,
+      "start": 974.849,
+      "end": 977.018,
+      "text": "I want my children to be happy,"
+    },
+    {
+      "id": 297,
+      "start": 977.689,
+      "end": 980.713,
+      "text": "and I love them most achingly when they are sad."
+    },
+    {
+      "id": 298,
+      "start": 981.39,
+      "end": 986.188,
+      "text": "As a gay father, I can teach them to own what is wrong in their lives,"
+    },
+    {
+      "id": 299,
+      "start": 986.827,
+      "end": 990.916,
+      "text": "but I believe that if I succeed in sheltering them from adversity, 00:16:26.827 --> 00:16:30.916 but I believe that if I succeed in sheltering them from adversity,"
+    },
+    {
+      "id": 300,
+      "start": 990.94,
+      "end": 992.896,
+      "text": "I will have failed as a parent."
+    },
+    {
+      "id": 301,
+      "start": 993.83,
+      "end": 996.789,
+      "text": "A Buddhist scholar I know once explained to me"
+    },
+    {
+      "id": 302,
+      "start": 996.813,
+      "end": 998.983,
+      "text": "that Westerners mistakenly think"
+    },
+    {
+      "id": 303,
+      "start": 999.007,
+      "end": 1003.389,
+      "text": "that nirvana is what arrives when all your woe is behind you,"
+    },
+    {
+      "id": 304,
+      "start": 1003.909,
+      "end": 1006.458,
+      "text": "and you have only bliss to look forward to."
+    },
+    {
+      "id": 305,
+      "start": 1007.021,
+      "end": 1009.163,
+      "text": "But he said that would not be nirvana,"
+    },
+    {
+      "id": 306,
+      "start": 1009.187,
+      "end": 1011.188,
+      "text": "because your bliss in the present"
+    },
+    {
+      "id": 307,
+      "start": 1011.212,
+      "end": 1014.097,
+      "text": "would always be shadowed by the joy from the past."
+    },
+    {
+      "id": 308,
+      "start": 1014.6,
+      "end": 1017.407,
+      "text": "Nirvana, he said, is what you arrive at"
+    },
+    {
+      "id": 309,
+      "start": 1017.431,
+      "end": 1020.027,
+      "text": "when you have only bliss to look forward to 00:16:57.431 --> 00:17:00.027 when you have only bliss to look forward to"
+    },
+    {
+      "id": 310,
+      "start": 1020.051,
+      "end": 1024.722,
+      "text": "and find in what looked like sorrows the seedlings of your joy."
+    },
+    {
+      "id": 311,
+      "start": 1025.426,
+      "end": 1027.178,
+      "text": "And I sometimes wonder"
+    },
+    {
+      "id": 312,
+      "start": 1027.202,
+      "end": 1030.899,
+      "text": "whether I could have found such fulfillment in marriage and children"
+    },
+    {
+      "id": 313,
+      "start": 1030.923,
+      "end": 1032.488,
+      "text": "if they'd come more readily,"
+    },
+    {
+      "id": 314,
+      "start": 1033.115,
+      "end": 1037.046,
+      "text": "if I'd been straight in my youth or were young now,"
+    },
+    {
+      "id": 315,
+      "start": 1037.07,
+      "end": 1039.538,
+      "text": "in either of which cases this might be easier."
+    },
+    {
+      "id": 316,
+      "start": 1040.585,
+      "end": 1042.047,
+      "text": "Perhaps I could."
+    },
+    {
+      "id": 317,
+      "start": 1042.071,
+      "end": 1044.278,
+      "text": "Perhaps all the complex imagining I've done"
+    },
+    {
+      "id": 318,
+      "start": 1044.302,
+      "end": 1046.577,
+      "text": "could have been applied to other topics."
+    },
+    {
+      "id": 319,
+      "start": 1046.601,
+      "end": 1050.254,
+      "text": "But if seeking meaning matters more than finding meaning, 00:17:26.601 --> 00:17:30.254 But if seeking meaning matters more than finding meaning,"
+    },
+    {
+      "id": 320,
+      "start": 1050.278,
+      "end": 1054.851,
+      "text": "the question is not whether I'd be happier for having been bullied,"
+    },
+    {
+      "id": 321,
+      "start": 1054.875,
+      "end": 1058.26,
+      "text": "but whether assigning meaning to those experiences"
+    },
+    {
+      "id": 322,
+      "start": 1058.284,
+      "end": 1059.981,
+      "text": "has made me a better father."
+    },
+    {
+      "id": 323,
+      "start": 1060.878,
+      "end": 1064.714,
+      "text": "I tend to find the ecstasy hidden in ordinary joys,"
+    },
+    {
+      "id": 324,
+      "start": 1064.738,
+      "end": 1068.3,
+      "text": "because I did not expect those joys to be ordinary to me."
+    },
+    {
+      "id": 325,
+      "start": 1069.265,
+      "end": 1073.324,
+      "text": "I know many heterosexuals who have equally happy marriages and families,"
+    },
+    {
+      "id": 326,
+      "start": 1073.348,
+      "end": 1076.292,
+      "text": "but gay marriage is so breathtakingly fresh,"
+    },
+    {
+      "id": 327,
+      "start": 1076.316,
+      "end": 1079.633,
+      "text": "and gay families so exhilaratingly new,"
+    },
+    {
+      "id": 328,
+      "start": 1079.657,
+      "end": 1082.754,
+      "text": "and I found meaning in that surprise. 00:17:59.657 --> 00:18:02.754 and I found meaning in that surprise."
+    },
+    {
+      "id": 329,
+      "start": 1083.772,
+      "end": 1087.262,
+      "text": "In October, it was my 50th birthday,"
+    },
+    {
+      "id": 330,
+      "start": 1087.286,
+      "end": 1089.828,
+      "text": "and my family organized a party for me."
+    },
+    {
+      "id": 331,
+      "start": 1090.42,
+      "end": 1093.205,
+      "text": "And in the middle of it, my son said to my husband"
+    },
+    {
+      "id": 332,
+      "start": 1093.229,
+      "end": 1094.976,
+      "text": "that he wanted to make a speech."
+    },
+    {
+      "id": 333,
+      "start": 1095.0,
+      "end": 1096.158,
+      "text": "And John said,"
+    },
+    {
+      "id": 334,
+      "start": 1096.182,
+      "end": 1100.241,
+      "text": "\"George, you can't make a speech. You're four.\""
+    },
+    {
+      "id": 335,
+      "start": 1100.265,
+      "end": 1101.946,
+      "text": "(Laughter)"
+    },
+    {
+      "id": 336,
+      "start": 1101.97,
+      "end": 1106.491,
+      "text": "\"Only Grandpa and Uncle David and I are going to make speeches tonight.\""
+    },
+    {
+      "id": 337,
+      "start": 1106.515,
+      "end": 1109.11,
+      "text": "But George insisted and insisted,"
+    },
+    {
+      "id": 338,
+      "start": 1109.134,
+      "end": 1112.582,
+      "text": "and finally, John took him up to the microphone, 00:18:29.134 --> 00:18:32.582 and finally, John took him up to the microphone,"
+    },
+    {
+      "id": 339,
+      "start": 1112.606,
+      "end": 1115.455,
+      "text": "and George said very loudly,"
+    },
+    {
+      "id": 340,
+      "start": 1115.479,
+      "end": 1117.899,
+      "text": "\"Ladies and gentlemen!"
+    },
+    {
+      "id": 341,
+      "start": 1117.923,
+      "end": 1120.395,
+      "text": "May I have your attention, please?\""
+    },
+    {
+      "id": 342,
+      "start": 1120.419,
+      "end": 1122.514,
+      "text": "And everyone turned around, startled."
+    },
+    {
+      "id": 343,
+      "start": 1123.135,
+      "end": 1124.446,
+      "text": "And George said,"
+    },
+    {
+      "id": 344,
+      "start": 1125.327,
+      "end": 1127.207,
+      "text": "\"I'm glad it's daddy's birthday."
+    },
+    {
+      "id": 345,
+      "start": 1127.976,
+      "end": 1129.713,
+      "text": "I'm glad we all get cake."
+    },
+    {
+      "id": 346,
+      "start": 1131.284,
+      "end": 1133.729,
+      "text": "And Daddy, if you were little,"
+    },
+    {
+      "id": 347,
+      "start": 1134.312,
+      "end": 1135.692,
+      "text": "I'd be your friend.\""
+    },
+    {
+      "id": 348,
+      "start": 1135.934,
+      "end": 1137.084,
+      "text": "(Gasp)"
+    },
+    {
+      "id": 349,
+      "start": 1137.958,
+      "end": 1139.494,
+      "text": "And I thought -- (Applause)"
+    },
+    {
+      "id": 350,
+      "start": 1139.988,
+      "end": 1141.139,
+      "text": "Thank you. 00:18:59.988 --> 00:19:01.139 Thank you."
+    },
+    {
+      "id": 351,
+      "start": 1141.163,
+      "end": 1144.851,
+      "text": "I thought that I was indebted even to Bobby Finkel,"
+    },
+    {
+      "id": 352,
+      "start": 1144.875,
+      "end": 1147.517,
+      "text": "because all those earlier experiences"
+    },
+    {
+      "id": 353,
+      "start": 1147.541,
+      "end": 1149.956,
+      "text": "were what had propelled me to this moment,"
+    },
+    {
+      "id": 354,
+      "start": 1149.98,
+      "end": 1152.489,
+      "text": "and I was finally unconditionally grateful"
+    },
+    {
+      "id": 355,
+      "start": 1152.513,
+      "end": 1155.667,
+      "text": "for a life I'd once have done anything to change."
+    },
+    {
+      "id": 356,
+      "start": 1156.719,
+      "end": 1160.956,
+      "text": "The gay activist Harvey Milk was once asked by a younger gay man"
+    },
+    {
+      "id": 357,
+      "start": 1160.98,
+      "end": 1163.06,
+      "text": "what he could do to help the movement,"
+    },
+    {
+      "id": 358,
+      "start": 1163.084,
+      "end": 1164.678,
+      "text": "and Harvey Milk said,"
+    },
+    {
+      "id": 359,
+      "start": 1164.702,
+      "end": 1166.289,
+      "text": "\"Go out and tell someone.\""
+    },
+    {
+      "id": 360,
+      "start": 1167.138,
+      "end": 1170.637,
+      "text": "There's always somebody who wants to confiscate our humanity. 00:19:27.138 --> 00:19:30.637 There's always somebody who wants to confiscate our humanity."
+    },
+    {
+      "id": 361,
+      "start": 1171.011,
+      "end": 1173.266,
+      "text": "And there are always stories that restore it."
+    },
+    {
+      "id": 362,
+      "start": 1173.816,
+      "end": 1175.371,
+      "text": "If we live out loud,"
+    },
+    {
+      "id": 363,
+      "start": 1175.395,
+      "end": 1177.392,
+      "text": "we can trounce the hatred,"
+    },
+    {
+      "id": 364,
+      "start": 1177.416,
+      "end": 1179.622,
+      "text": "and expand everyone's lives."
+    },
+    {
+      "id": 365,
+      "start": 1180.569,
+      "end": 1181.785,
+      "text": "Forge meaning."
+    },
+    {
+      "id": 366,
+      "start": 1182.222,
+      "end": 1183.58,
+      "text": "Build identity."
+    },
+    {
+      "id": 367,
+      "start": 1184.169,
+      "end": 1185.731,
+      "text": "Forge meaning."
+    },
+    {
+      "id": 368,
+      "start": 1186.393,
+      "end": 1188.379,
+      "text": "Build identity."
+    },
+    {
+      "id": 369,
+      "start": 1189.228,
+      "end": 1192.135,
+      "text": "And then invite the world to share your joy."
+    },
+    {
+      "id": 370,
+      "start": 1192.675,
+      "end": 1193.874,
+      "text": "Thank you."
+    },
+    {
+      "id": 371,
+      "start": 1193.898,
+      "end": 1196.916,
+      "text": "(Applause)"
+    },
+    {
+      "id": 372,
+      "start": 1196.94,
+      "end": 1198.158,
+      "text": "Thank you."
+    },
+    {
+      "id": 373,
+      "start": 1198.182,
+      "end": 1200.2,
+      "text": "(Applause) 00:19:58.182 --> 00:20:00.200 (Applause)"
+    },
+    {
+      "id": 374,
+      "start": 1200.224,
+      "end": 1201.403,
+      "text": "Thank you."
+    },
+    {
+      "id": 375,
+      "start": 1201.427,
+      "end": 1204.125,
+      "text": "(Applause)"
+    },
+    {
+      "id": 376,
+      "start": 1204.149,
+      "end": 1205.302,
+      "text": "Thank you."
+    },
+    {
+      "id": 377,
+      "start": 1205.326,
+      "end": 1210.357,
+      "text": "(Applause)"
+    }
+  ]
+}

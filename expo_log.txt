@@ -1,0 +1,197 @@
+Starting Expo... 
+Starting project at E:\workspace_hermes\ListenApp
+Starting Metro Bundler
+
+Waiting on http://localhost:8082
+Logs for your project will appear below.
+Android Bundled 644ms index.js (712 modules)
+Android Bundled 790ms index.js (1 module)
+ LOG  VirtualizedList: You have a large list that is slow to update - make sure your renderItem function renders components that follow React performance best practices like PureComponent, shouldComponentUpdate, etc. {"contentLength": 32766, "dt": 590, "prevDt": 2043}
+Android Bundled 31ms index.js (1 module)
+Android Bundled 28ms index.js (1 module)
+Android Bundled 33ms index.js (1 module)
+Android Bundled 32ms index.js (1 module)
+ LOG  VirtualizedList: You have a large list that is slow to update - make sure your renderItem function renders components that follow React performance best practices like PureComponent, shouldComponentUpdate, etc. {"contentLength": 32820, "dt": 4041, "prevDt": 194991}
+Android Bundled 27ms index.js (1 module)
+ LOG  VirtualizedList: You have a large list that is slow to update - make sure your renderItem function renders components that follow React performance best practices like PureComponent, shouldComponentUpdate, etc. {"contentLength": 28051, "dt": 4386, "prevDt": 2963}
+Android Bundled 28ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 29ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 27ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 36ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 35ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 28ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 27ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 90ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 29ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 95ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 29ms index.js (1 module)
+ ERROR  Each child in a list should have a unique "key" prop.
+
+Check the render method of `ScrollView`. It was passed a child from App. See https://react.dev/link/warning-keys for more information.
+Android Bundled 120ms index.js (1 module)
+Android Bundled 27ms index.js (1 module)
+Android Bundled 27ms index.js (1 module)
+ ERROR  [ReferenceError: Property 'offsetPan' doesn't exist]
+ ERROR  [ReferenceError: Property 'offsetPan' doesn't exist]
+Android Bundled 27ms index.js (1 module)
+ ERROR  [ReferenceError: Property 'offsetPan' doesn't exist]
+Android Bundled 93ms index.js (1 module)
+Android Bundled 27ms index.js (1 module)
+ ERROR  [ReferenceError: Property 'offsetDragging' doesn't exist]
+Android Bundled 112ms index.js (1 module)
+ ERROR  [ReferenceError: Property 'offsetTrackLayout' doesn't exist]
+Android Bundled 43ms index.js (1 module)
+ ERROR  [ReferenceError: Property 'offsetDisplayPct' doesn't exist]
+Android Bundled 32ms index.js (1 module)
+Android Bundled 56ms index.js (1 module)
+› Detected a change in babel.config.js. Restart the server to see the new results. You may need to clear the bundler cache with the --clear flag for your changes to take effect.
+ ERROR  [ReferenceError: Property 'offsetDisplayRef' doesn't exist]
+ ERROR  SyntaxError: E:\workspace_hermes\ListenApp\App.js: Unexpected token, expected "," (629:0)
+
+  627 | }
+  628 |
+> 629 | const styles = StyleSheet.create({
+      | ^
+  630 |   container: {
+  631 |     flex: 1,
+  632 |   },
+    at constructor (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:365:19)
+    at FlowParserMixin.raise (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:6616:19)
+    at FlowParserMixin.unexpected (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:6636:16)
+    at FlowParserMixin.expect (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:6916:12)
+    at FlowParserMixin.parseCallExpressionArguments (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11260:14)
+    at FlowParserMixin.parseCoverCallAndAsyncArrowHead (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11203:29)
+    at FlowParserMixin.parseSubscript (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11137:19)
+    at FlowParserMixin.parseSubscript (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:3662:18)
+    at FlowParserMixin.parseSubscripts (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11111:19)
+    at FlowParserMixin.parseSubscripts (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:3628:18)
+    at FlowParserMixin.parseExprSubscripts (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11102:17)
+    at FlowParserMixin.parseUpdate (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11083:21)
+    at FlowParserMixin.parseMaybeUnary (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11063:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10916:61)
+    at FlowParserMixin.parseExprOps (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10921:23)
+    at FlowParserMixin.parseMaybeConditional (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10898:23)
+    at FlowParserMixin.parseMaybeAssign (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10848:21)
+    at FlowParserMixin.parseMaybeAssign (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:3561:18)
+    at FlowParserMixin.parseExpressionBase (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10801:23)
+    at E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10797:39
+    at FlowParserMixin.allowInAnd (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12438:16)
+    at FlowParserMixin.parseExpression (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10797:17)
+    at FlowParserMixin.parseStatementContent (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12912:23)
+    at FlowParserMixin.parseStatementLike (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12784:17)
+    at FlowParserMixin.parseStatementLike (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2930:24)
+    at FlowParserMixin.parseStatementListItem (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12764:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13333:61)
+    at FlowParserMixin.parseBlockBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13326:10)
+    at FlowParserMixin.parseBlock (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13314:10)
+    at FlowParserMixin.parseFunctionBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12117:24)
+    at FlowParserMixin.parseFunctionBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2907:11)
+    at FlowParserMixin.parseFunctionBodyAndFinish (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12103:10)
+    at FlowParserMixin.parseFunctionBodyAndFinish (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2915:18)
+    at E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13462:12
+    at FlowParserMixin.withSmartMixTopicForbiddingContext (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12420:14)
+    at FlowParserMixin.parseFunction (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13461:10)
+    at FlowParserMixin.parseExportDefaultExpression (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13924:19)
+    at FlowParserMixin.parseExportDefaultExpression (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2978:18)
+    at FlowParserMixin.parseExport (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13845:25)
+    at FlowParserMixin.parseStatementContent (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12895:27)
+    at FlowParserMixin.parseStatementLike (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12784:17)
+    at FlowParserMixin.parseStatementLike (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2930:24)
+    at FlowParserMixin.parseModuleItem (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12761:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13333:36)
+    at FlowParserMixin.parseBlockBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13326:10)
+    at FlowParserMixin.parseProgram (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12639:10)
+    at FlowParserMixin.parseTopLevel (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12629:25)
+    at FlowParserMixin.parseTopLevel (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:3697:28)
+    at FlowParserMixin.parse (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:14505:25)
+    at parse (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:14518:26)
+ ERROR  SyntaxError: E:\workspace_hermes\ListenApp\App.js: Unexpected token, expected "," (629:0)
+
+  627 | }
+  628 |
+> 629 | const styles = StyleSheet.create({
+      | ^
+  630 |   container: {
+  631 |     flex: 1,
+  632 |   },
+    at constructor (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:365:19)
+    at FlowParserMixin.raise (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:6616:19)
+    at FlowParserMixin.unexpected (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:6636:16)
+    at FlowParserMixin.expect (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:6916:12)
+    at FlowParserMixin.parseCallExpressionArguments (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11260:14)
+    at FlowParserMixin.parseCoverCallAndAsyncArrowHead (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11203:29)
+    at FlowParserMixin.parseSubscript (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11137:19)
+    at FlowParserMixin.parseSubscript (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:3662:18)
+    at FlowParserMixin.parseSubscripts (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11111:19)
+    at FlowParserMixin.parseSubscripts (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:3628:18)
+    at FlowParserMixin.parseExprSubscripts (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11102:17)
+    at FlowParserMixin.parseUpdate (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11083:21)
+    at FlowParserMixin.parseMaybeUnary (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:11063:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10916:61)
+    at FlowParserMixin.parseExprOps (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10921:23)
+    at FlowParserMixin.parseMaybeConditional (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10898:23)
+    at FlowParserMixin.parseMaybeAssign (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10848:21)
+    at FlowParserMixin.parseMaybeAssign (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:3561:18)
+    at FlowParserMixin.parseExpressionBase (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10801:23)
+    at E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10797:39
+    at FlowParserMixin.allowInAnd (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12438:16)
+    at FlowParserMixin.parseExpression (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:10797:17)
+    at FlowParserMixin.parseStatementContent (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12912:23)
+    at FlowParserMixin.parseStatementLike (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12784:17)
+    at FlowParserMixin.parseStatementLike (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2930:24)
+    at FlowParserMixin.parseStatementListItem (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12764:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13333:61)
+    at FlowParserMixin.parseBlockBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13326:10)
+    at FlowParserMixin.parseBlock (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13314:10)
+    at FlowParserMixin.parseFunctionBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12117:24)
+    at FlowParserMixin.parseFunctionBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2907:11)
+    at FlowParserMixin.parseFunctionBodyAndFinish (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12103:10)
+    at FlowParserMixin.parseFunctionBodyAndFinish (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2915:18)
+    at E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13462:12
+    at FlowParserMixin.withSmartMixTopicForbiddingContext (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12420:14)
+    at FlowParserMixin.parseFunction (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13461:10)
+    at FlowParserMixin.parseExportDefaultExpression (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13924:19)
+    at FlowParserMixin.parseExportDefaultExpression (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2978:18)
+    at FlowParserMixin.parseExport (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13845:25)
+    at FlowParserMixin.parseStatementContent (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12895:27)
+    at FlowParserMixin.parseStatementLike (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12784:17)
+    at FlowParserMixin.parseStatementLike (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:2930:24)
+    at FlowParserMixin.parseModuleItem (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12761:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13333:36)
+    at FlowParserMixin.parseBlockBody (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:13326:10)
+    at FlowParserMixin.parseProgram (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12639:10)
+    at FlowParserMixin.parseTopLevel (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:12629:25)
+    at FlowParserMixin.parseTopLevel (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:3697:28)
+    at FlowParserMixin.parse (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:14505:25)
+    at parse (E:\workspace_hermes\ListenApp\node_modules\@babel\parser\lib\index.js:14518:26)
+Android Bundled 938ms index.js (1 module)

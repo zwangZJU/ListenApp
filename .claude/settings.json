@@ -1,4 +1,19 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(node -c screens/Player.js)",
+      "Bash(npx -y acorn-jsx)",
+      "Bash(node -e \"try{require\\('fs'\\).readFileSync\\('screens/Player.js','utf8'\\)}catch\\(e\\){}\")",
+      "Bash(node -e ' *)",
+      "Bash(curl -s \"https://www.ted.com/talks/subtitles/id/1/lang/en\")",
+      "Bash(curl -sL \"https://www.ted.com/talks/subtitles/id/1/lang/en\")",
+      "Bash(curl -sL -w \"\\\\n%{http_code}\" \"https://www.ted.com/talks/subtitles/id/1/lang/en\")",
+      "Bash(curl -skL -w \"\\\\n%{http_code}\" \"https://www.ted.com/talks/subtitles/id/1/lang/en\")",
+      "Bash(curl -sk \"https://www.ted.com/talks/subtitles/id/1/lang/en\")",
+      "Bash(node -e \"const d=require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\);const j=JSON.parse\\(d\\);console.log\\('First caption keys:', Object.keys\\(j.captions[0]\\)\\);console.log\\('First caption:', JSON.stringify\\(j.captions[0]\\)\\)\")"
+    ]
+  },
   "enabledPlugins": {
     "expo@claude-plugins-official": true
   }

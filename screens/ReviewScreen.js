@@ -1,0 +1,203 @@
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import {
+  StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { getReviewQueue, saveReviewQueue, getLessons } from '../lib/learning-store';
+import { getDueItems, recordSuccess, recordFailure, getQueueStats } from '../lib/review-queue';
+
+export default function ReviewScreen({ navigation }) {
+  const [queue, setQueue] = useState([]);
+  const [lessons, setLessons] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('due');
+
+  useEffect(() => {
+    (async () => {
+      const [q, l] = await Promise.all([getReviewQueue(), getLessons()]);
+      setQueue(q);
+      setLessons(l);
+      setLoading(false);
+    })();
+  }, []);
+
+  const stats = useMemo(() => getQueueStats(queue), [queue]);
+  const dueItems = useMemo(() => getDueItems(queue), [queue]);
+
+  const findSubtitleForItem = useCallback((item) => {
+    const lesson = lessons.find((l) => l.id === item.lessonId);
+    if (!lesson || !lesson.subtitles) return null;
+    const sub = lesson.subtitles.find((s) => s.id === item.subtitleId);
+    return sub ? { ...sub, lessonTitle: lesson.title, lessonId: lesson.id } : null;
+  }, [lessons]);
+
+  const handleReview = useCallback(async (item, correct) => {
+    let updatedQueue;
+    if (correct) {
+      updatedQueue = queue.map((q) => q.subtitleId === item.subtitleId && q.lessonId === item.lessonId ? recordSuccess(q) : q);
+    } else {
+      updatedQueue = queue.map((q) => q.subtitleId === item.subtitleId && q.lessonId === item.lessonId ? recordFailure(q) : q);
+    }
+    setQueue(updatedQueue);
+    await saveReviewQueue(updatedQueue);
+  }, [queue]);
+
+  const navigateToLesson = useCallback((item) => {
+    const lesson = lessons.find((l) => l.id === item.lessonId);
+    if (lesson) {
+      navigation.navigate('Player', {
+        lessonId: lesson.id, videoId: lesson.videoId, title: lesson.title,
+        source: lesson.videoSource || 'youtube', asrSubtitles: lesson.subtitles,
+        asrRawText: lesson.rawText, difficulty: lesson.difficulty,
+        difficultyLabel: lesson.difficultyLabel,
+        focusSubtitleId: item.subtitleId,
+      });
+    }
+  }, [navigation, lessons]);
+
+  const renderDueItem = useCallback(({ item }) => {
+    const sub = findSubtitleForItem(item);
+    if (!sub) return null;
+
+    return (
+      <View style={styles.reviewCard}>
+        <TouchableOpacity onPress={() => navigateToLesson(item)} activeOpacity={0.7}>
+          <Text style={styles.lessonRef}>{sub.lessonTitle}</Text>
+          <Text style={styles.sentenceText}>{sub.text}</Text>
+          {sub.zh && <Text style={styles.translationText}>{sub.zh}</Text>}
+        </TouchableOpacity>
+        <View style={styles.reviewActions}>
+          <TouchableOpacity style={[styles.actionBtn, styles.hardBtn]} onPress={() => handleReview(item, false)}>
+            <Text style={styles.hardBtnText}>Hard</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.actionBtn, styles.easyBtn]} onPress={() => handleReview(item, true)}>
+            <Text style={styles.easyBtnText}>Easy</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }, [findSubtitleForItem, handleReview, navigateToLesson]);
+
+  const renderQueueItem = useCallback(({ item }) => {
+    const sub = findSubtitleForItem(item);
+    if (!sub) return null;
+
+    const levelLabels = ['New', '1d', '3d', '7d', '14d', '30d'];
+    const levelColors = ['#94A3B8', '#EF4444', '#F59E0B', '#3B82F6', '#10B981', '#059669'];
+
+    return (
+      <TouchableOpacity style={styles.queueCard} onPress={() => navigateToLesson(item)} activeOpacity={0.7}>
+        <View style={styles.queueCardHeader}>
+          <Text style={styles.queueSentence} numberOfLines={2}>{sub.text}</Text>
+          <View style={[styles.levelBadge, { backgroundColor: levelColors[item.level] || '#94A3B8' }]}>
+            <Text style={styles.levelBadgeText}>{levelLabels[item.level] || 'New'}</Text>
+          </View>
+        </View>
+        <Text style={styles.queueLessonRef}>{sub.lessonTitle}</Text>
+      </TouchableOpacity>
+    );
+  }, [findSubtitleForItem, navigateToLesson]);
+
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.container} edges={['top']}>
+        <View style={styles.centerContent}>
+          <ActivityIndicator size="large" color="#3B82F6" />
+          <Text style={styles.loadingText}>Loading review queue...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  const displayItems = activeTab === 'due' ? dueItems : queue;
+
+  return (
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Review</Text>
+        <View style={styles.statsRow}>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>{stats.due}</Text>
+            <Text style={styles.statLabel}>Due</Text>
+          </View>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>{stats.total}</Text>
+            <Text style={styles.statLabel}>Total</Text>
+          </View>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>{stats.mastered}</Text>
+            <Text style={styles.statLabel}>Mastered</Text>
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.tabRow}>
+        <TouchableOpacity style={[styles.tabBtn, activeTab === 'due' && styles.tabBtnActive]}
+          onPress={() => setActiveTab('due')}>
+          <Text style={[styles.tabBtnText, activeTab === 'due' && styles.tabBtnTextActive]}>Due ({dueItems.length})</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.tabBtn, activeTab === 'all' && styles.tabBtnActive]}
+          onPress={() => setActiveTab('all')}>
+          <Text style={[styles.tabBtnText, activeTab === 'all' && styles.tabBtnTextActive]}>All ({queue.length})</Text>
+        </TouchableOpacity>
+      </View>
+
+      {displayItems.length === 0 ? (
+        <View style={styles.centerContent}>
+          <Text style={styles.emptyIcon}>🎉</Text>
+          <Text style={styles.emptyText}>
+            {activeTab === 'due' ? 'All caught up!' : 'No review items yet'}
+          </Text>
+          <Text style={styles.emptySubtext}>
+            {activeTab === 'due' ? 'Mark sentences as "Hard" during practice to add them here.' : 'Start practicing to build your review queue.'}
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={displayItems}
+          renderItem={activeTab === 'due' ? renderDueItem : renderQueueItem}
+          keyExtractor={(item, idx) => `${item.lessonId}_${item.subtitleId}_${idx}`}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#F8FAFC' },
+  header: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 16, backgroundColor: '#FFFFFF', borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#E2E8F0' },
+  headerTitle: { fontSize: 28, fontWeight: '800', color: '#1E293B', letterSpacing: -0.5 },
+  statsRow: { flexDirection: 'row', gap: 12, marginTop: 16 },
+  statCard: { flex: 1, backgroundColor: '#F1F5F9', borderRadius: 10, padding: 12, alignItems: 'center' },
+  statNumber: { fontSize: 24, fontWeight: '800', color: '#1E293B' },
+  statLabel: { fontSize: 12, color: '#64748B', marginTop: 2 },
+  tabRow: { flexDirection: 'row', paddingHorizontal: 16, paddingVertical: 12, gap: 8, backgroundColor: '#FFFFFF', borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#E2E8F0' },
+  tabBtn: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, backgroundColor: '#F1F5F9' },
+  tabBtnActive: { backgroundColor: '#3B82F6' },
+  tabBtnText: { fontSize: 14, fontWeight: '600', color: '#64748B' },
+  tabBtnTextActive: { color: '#FFFFFF' },
+  listContent: { padding: 16 },
+  reviewCard: { backgroundColor: '#FFFFFF', borderRadius: 10, padding: 16, marginBottom: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.06, shadowRadius: 4, elevation: 2 },
+  lessonRef: { fontSize: 12, color: '#3B82F6', fontWeight: '600', marginBottom: 6 },
+  sentenceText: { fontSize: 16, color: '#1E293B', lineHeight: 24, fontWeight: '500' },
+  translationText: { fontSize: 14, color: '#64748B', marginTop: 6, lineHeight: 20 },
+  reviewActions: { flexDirection: 'row', gap: 12, marginTop: 12 },
+  actionBtn: { flex: 1, paddingVertical: 10, borderRadius: 8, alignItems: 'center' },
+  hardBtn: { backgroundColor: '#FEF2F2', borderWidth: 1, borderColor: '#FECACA' },
+  hardBtnText: { color: '#EF4444', fontWeight: '700', fontSize: 14 },
+  easyBtn: { backgroundColor: '#F0FDF4', borderWidth: 1, borderColor: '#BBF7D0' },
+  easyBtnText: { color: '#16A34A', fontWeight: '700', fontSize: 14 },
+  queueCard: { backgroundColor: '#FFFFFF', borderRadius: 10, padding: 14, marginBottom: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.04, shadowRadius: 3, elevation: 1 },
+  queueCardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
+  queueSentence: { flex: 1, fontSize: 14, color: '#334155', lineHeight: 20, marginRight: 8 },
+  levelBadge: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: 10 },
+  levelBadgeText: { color: '#FFFFFF', fontSize: 11, fontWeight: '700' },
+  queueLessonRef: { fontSize: 12, color: '#94A3B8', marginTop: 6 },
+  centerContent: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 80 },
+  loadingText: { marginTop: 12, fontSize: 15, color: '#6B7280' },
+  emptyIcon: { fontSize: 48, marginBottom: 12 },
+  emptyText: { fontSize: 16, color: '#6B7280', fontWeight: '500' },
+  emptySubtext: { fontSize: 13, color: '#94A3B8', marginTop: 4, textAlign: 'center', paddingHorizontal: 40 },
+});

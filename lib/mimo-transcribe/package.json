@@ -1,0 +1,12 @@
+{
+  "name": "mimo-transcribe",
+  "version": "1.0.0",
+  "description": "Video-to-text transcription library using FFmpegKit + MiMo ASR API",
+  "main": "src/index.js",
+  "license": "MIT",
+  "keywords": ["asr", "transcription", "mimo", "ffmpeg", "speech-recognition"],
+  "peerDependencies": {
+    "ffmpeg-kit-react-native": ">=6.0.0",
+    "react-native-fs": ">=2.20.0"
+  }
+}

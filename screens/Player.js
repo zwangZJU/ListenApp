@@ -184,31 +184,34 @@ function parseCaptionText(text) {
 
 // ====== 字幕组件 ======
 
-const SubtitleItem = React.memo(({ item, isActive, theme, onPress, practiceMode, index }) => {
+const SubtitleItem = React.memo(({ item, isActive, theme, onPress, practiceMode }) => {
   const T = theme;
   return (
     <TouchableOpacity
       style={{
-        minHeight: isActive ? EXPANDED_HEIGHT : ITEM_HEIGHT,
+        height: isActive ? undefined : ITEM_HEIGHT,
+        minHeight: isActive ? EXPANDED_HEIGHT : undefined,
         flexDirection: 'row',
+        alignItems: isActive ? 'flex-start' : 'center',
         paddingHorizontal: 16,
-        paddingVertical: isActive ? 14 : 12,
+        paddingVertical: 12,
         borderLeftWidth: 3,
         borderLeftColor: isActive ? T.activeBorder : 'transparent',
         backgroundColor: isActive ? T.highlightBg : 'transparent',
         borderRadius: isActive ? 10 : 0,
         marginHorizontal: isActive ? 4 : 0,
+        overflow: 'hidden',
       }}
       onPress={() => onPress(item)}
       activeOpacity={0.7}
     >
       <View style={{ flex: 1, marginRight: 12 }}>
         {practiceMode === 'listen-only' ? (
-          <Text style={[styles.subtitleTextEn, { color: isActive ? T.subtitleTextActive : T.subtitleText }, isActive && styles.subtitleTextActive]} numberOfLines={isActive ? 2 : 1}>
+          <Text style={[styles.subtitleTextEn, { color: isActive ? T.subtitleTextActive : T.subtitleText }, isActive && styles.subtitleTextActive]} numberOfLines={1}>
             {'• • •'}
           </Text>
         ) : (
-          <Text style={[styles.subtitleTextEn, { color: isActive ? T.subtitleTextActive : T.subtitleText }, isActive && styles.subtitleTextActive]} numberOfLines={isActive ? 2 : 1}>
+          <Text style={[styles.subtitleTextEn, { color: isActive ? T.subtitleTextActive : T.subtitleText }, isActive && styles.subtitleTextActive]} numberOfLines={isActive ? undefined : 1}>
             {item.text.replace(/\n/g, ' ')}
           </Text>
         )}
@@ -347,21 +350,22 @@ export default function Player({ route }) {
   // 字幕切换时：LayoutAnimation 弹性展开 + 自动滚动到中心
   useEffect(() => {
     if (subtitles.length === 0) return;
-    LayoutAnimation.configureNext(LayoutAnimation.create(
-      250,
-      LayoutAnimation.Types.easeInEaseOut,
-      LayoutAnimation.Properties.scaleY,
-    ));
+    LayoutAnimation.configureNext({
+      ...LayoutAnimation.Presets.spring,
+      duration: 400,
+    });
     // 自动滚动到当前字幕
     if (!isSubtitleDragging.current && subtitleScrollRef.current) {
       const idx = currentIndex;
-      const itemTop = idx * ITEM_HEIGHT + Math.max(0, idx - 1) * (EXPANDED_HEIGHT - ITEM_HEIGHT);
-      const itemHeight = idx === currentIndex ? EXPANDED_HEIGHT : ITEM_HEIGHT;
+      // 计算当前字幕的 top 位置
+      const expandedDiff = EXPANDED_HEIGHT - ITEM_HEIGHT;
+      const itemTop = idx * ITEM_HEIGHT + expandedDiff;
+      const itemHeight = EXPANDED_HEIGHT;
       const containerH = SUBTITLE_AREA_HEIGHT;
       const targetY = Math.max(0, itemTop + itemHeight / 2 - containerH / 2);
       setTimeout(() => {
         subtitleScrollRef.current?.scrollTo({ y: targetY, animated: true });
-      }, 50);
+      }, 100);
     }
   }, [currentIndex, subtitles.length]);
 

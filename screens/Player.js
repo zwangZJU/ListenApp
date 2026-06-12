@@ -27,6 +27,7 @@ const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
 const VIDEO_HEIGHT = (SCREEN_WIDTH > 0 ? SCREEN_WIDTH : 400) * 9 / 16; // 16:9 aspect ratio based on width
 const SUBTITLE_AREA_HEIGHT = SCREEN_HEIGHT - VIDEO_HEIGHT - 200;
 const ITEM_HEIGHT = 72;
+const EXPANDED_HEIGHT = 120;
 const CENTER_OFFSET = (SUBTITLE_AREA_HEIGHT / 2) - (ITEM_HEIGHT / 2);
 const SLIDER_PADDING = 16;
 const SLIDER_WIDTH = SCREEN_WIDTH - SLIDER_PADDING * 2;
@@ -185,7 +186,7 @@ const SubtitleItem = React.memo(({ item, isActive, theme, onPress, practiceMode 
     <TouchableOpacity
       style={[
         styles.subtitleItem,
-        isActive && { borderLeftColor: T.activeBorder },
+        isActive && { borderLeftColor: T.activeBorder, zIndex: 0 },
       ]}
       onPress={() => onPress(item)}
       activeOpacity={0.7}
@@ -343,12 +344,22 @@ export default function Player({ route }) {
   const currentIndexRef = useRef(0);
   const offsetValueRef = useRef(0);
   const translationAbortRef = useRef(false);
+  const highlightHeight = useRef(new Animated.Value(EXPANDED_HEIGHT)).current;
 
   // 同步 subtitles 到 ref
   useEffect(() => { subtitlesRef.current = subtitles; }, [subtitles]);
 
   // 同步 offsetValue 到 ref
   useEffect(() => { offsetValueRef.current = offsetValue; }, [offsetValue]);
+
+  // 高亮块高度：始终展开
+  useEffect(() => {
+    Animated.timing(highlightHeight, {
+      toValue: EXPANDED_HEIGHT,
+      duration: 200,
+      useNativeDriver: false,
+    }).start();
+  }, [currentIndex, highlightHeight]);
 
   // 二分搜索：找到当前时间对应的字幕索引
   const findSubtitleIndex = useCallback((time, offset) => {
@@ -916,11 +927,11 @@ export default function Player({ route }) {
         style={[styles.videoContainer, { backgroundColor: T.videoBg, height: containerWidth > 0 ? containerWidth * 9 / 16 : VIDEO_HEIGHT }]}
         onLayout={(e) => { const w = e.nativeEvent.layout.width; if (w > 0) setContainerWidth(w); }}
       >
-        {videoSource === 'youtube' && containerWidth > 0 ? (
+        {videoSource === 'youtube' && containerWidth > 0 ? (() => { console.log('[Player] Rendering YouTube WebView, videoId=', videoId, 'containerWidth=', containerWidth); return (
           <WebView
             style={[styles.video, { width: containerWidth }]}
             source={{
-              html: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%;background:#000;overflow:hidden}iframe{width:100%;height:100%;border:none}</style></head><body><iframe src="https://www.youtube.com/embed/jNQXAC9IVRw?playsinline=1&rel=0&autoplay=1" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe><script>function log(m){try{window.ReactNativeWebView.postMessage(JSON.stringify({log:m}))}catch(e){}}setTimeout(function(){log('outer: '+window.innerWidth+'x'+window.innerHeight);var f=document.querySelector('iframe');if(f)log('iframe: '+f.clientWidth+'x'+f.clientHeight)},2000);<\/script></body></html>`,
+              html: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%;background:#000;overflow:hidden}iframe{width:100%;height:100%;border:none}</style></head><body><iframe src="https://www.youtube.com/embed/${videoId}?playsinline=1&rel=0&autoplay=1" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe><script>function log(m){try{window.ReactNativeWebView.postMessage(JSON.stringify({log:m}))}catch(e){}}setTimeout(function(){log('outer: '+window.innerWidth+'x'+window.innerHeight);var f=document.querySelector('iframe');if(f)log('iframe: '+f.clientWidth+'x'+f.clientHeight)},2000);<\/script></body></html>`,
             }}
             allowsFullscreenVideo
             allowsInlineMediaPlayback
@@ -960,7 +971,7 @@ export default function Player({ route }) {
             onLoadEnd={() => console.log('[Player] YouTube embed loaded')}
             onError={(e) => console.error('[Player] YouTube error:', e.nativeEvent)}
           />
-        ) : (
+        ); })() : (
           <>
             <VideoView
               style={styles.video}
@@ -1090,15 +1101,34 @@ export default function Player({ route }) {
             </View>
           ) : (
             <>
-              {/* 高亮指示条：前两条跟随字幕移动，第三条起固定 */}
-              <View
+              {/* 高亮指示条：展开时变高 */}
+              <Animated.View
                 style={[
                   styles.highlightBar,
                   { backgroundColor: T.highlightBg, borderColor: T.activeBorder },
-                  { transform: [{ translateY: (currentIndex < 2 ? currentIndex : 2) * ITEM_HEIGHT }] },
+                  { height: highlightHeight, transform: [{ translateY: (currentIndex < 2 ? currentIndex : 2) * ITEM_HEIGHT }] },
                 ]}
                 pointerEvents="none"
-              />
+              >
+                {subtitles[currentIndex] && (
+                  <View style={{ flex: 1, paddingHorizontal: 8, paddingVertical: 6, justifyContent: 'center' }}>
+                    {practiceMode !== 'listen-only' ? (
+                      <Text style={[styles.subtitleTextEn, { color: T.subtitleTextActive, fontWeight: '600' }]} numberOfLines={2}>
+                        {subtitles[currentIndex].text.replace(/\n/g, ' ')}
+                      </Text>
+                    ) : (
+                      <Text style={[styles.subtitleTextEn, { color: T.subtitleTextActive, fontWeight: '600' }]}>
+                        {'• • •'}
+                      </Text>
+                    )}
+                    {subtitles[currentIndex].zh && (
+                      <Text style={[styles.subtitleTextZh, { color: T.zhTextActive }]} numberOfLines={2}>
+                        {subtitles[currentIndex].zh.replace(/\n/g, ' ')}
+                      </Text>
+                    )}
+                  </View>
+                )}
+              </Animated.View>
               <FlatList
                 ref={flatListRef}
                 data={subtitles}
@@ -1220,10 +1250,10 @@ const styles = StyleSheet.create({
     top: 8,
     left: 8,
     right: 8,
-    height: ITEM_HEIGHT,
     borderRadius: 8,
     borderWidth: 1,
     zIndex: 1,
+    overflow: 'hidden',
   },
   subtitleItem: {
     flexDirection: 'row',

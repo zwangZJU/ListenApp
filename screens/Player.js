@@ -20,11 +20,11 @@ import { buildDictationItems } from '../lib/ai-coach';
 import { addToQueue, removeFromQueue } from '../lib/review-queue';
 import { getReviewQueue, saveReviewQueue, logSession, getLessonById, saveLesson } from '../lib/learning-store';
 import { estimateLessonDifficulty } from '../lib/difficulty';
-import { translateSubtitles, cancelTranslation, resetTranslationCancel } from '../lib/translate';
+import { translateSubtitles, translateToChinese, cancelTranslation, resetTranslationCancel } from '../lib/translate';
 import { getCachedSubtitles, cacheSubtitles, updateCachedSubtitles } from '../lib/subtitle-cache';
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
-const VIDEO_HEIGHT = SCREEN_WIDTH * 9 / 16; // 16:9 aspect ratio based on width
+const VIDEO_HEIGHT = (SCREEN_WIDTH > 0 ? SCREEN_WIDTH : 400) * 9 / 16; // 16:9 aspect ratio based on width
 const SUBTITLE_AREA_HEIGHT = SCREEN_HEIGHT - VIDEO_HEIGHT - 200;
 const ITEM_HEIGHT = 72;
 const CENTER_OFFSET = (SUBTITLE_AREA_HEIGHT / 2) - (ITEM_HEIGHT / 2);
@@ -33,6 +33,39 @@ const SLIDER_WIDTH = SCREEN_WIDTH - SLIDER_PADDING * 2;
 const OFFSET_MIN = -10;
 const OFFSET_MAX = 10;
 const OFFSET_RANGE = OFFSET_MAX - OFFSET_MIN;
+
+// Skeleton 骨架屏组件
+const SkeletonLine = ({ width = '100%', height = 14, style, delay = 0 }) => {
+  const opacity = useRef(new Animated.Value(0.3)).current;
+  useEffect(() => {
+    const anim = Animated.loop(
+      Animated.sequence([
+        Animated.timing(opacity, { toValue: 1, duration: 800, delay, useNativeDriver: true }),
+        Animated.timing(opacity, { toValue: 0.3, duration: 800, useNativeDriver: true }),
+      ])
+    );
+    anim.start();
+    return () => anim.stop();
+  }, []);
+  return (
+    <Animated.View
+      style={[
+        { width, height, borderRadius: 4, backgroundColor: '#D1D5DB', opacity },
+        style,
+      ]}
+    />
+  );
+};
+
+const SkeletonSubtitleItem = ({ delay = 0 }) => (
+  <View style={styles.subtitleItem}>
+    <View style={styles.subtitleContent}>
+      <SkeletonLine width="90%" height={20} delay={delay} />
+      <SkeletonLine width="55%" height={16} delay={delay + 150} style={{ marginTop: 4 }} />
+    </View>
+    <SkeletonLine width={36} height={10} delay={delay + 300} style={{ marginTop: 2 }} />
+  </View>
+);
 
 const TED_GRAPHQL = 'https://www.ted.com/graphql';
 
@@ -213,6 +246,7 @@ export default function Player({ route }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [offsetValue, setOffsetValue] = useState(0);
   const [showSubtitleArea, setShowSubtitleArea] = useState(true);
+  const [containerWidth, setContainerWidth] = useState(0);
   const [subtitle, setSubtitle] = useState('');
   const [zhSubtitle, setZhSubtitle] = useState('');
   const [isUserScrolling, setIsUserScrolling] = useState(false);
@@ -249,38 +283,26 @@ export default function Player({ route }) {
     }, 500);
   }, []);
 
-  // 创建播放器 - 使用空字符串而不是 null
-  console.log('[Player] Creating player with videoUrl:', videoUrl);
-  const player = useVideoPlayer(videoUrl ? { uri: videoUrl } : '', (p) => {
+  // 创建播放器 - 用 useMemo 稳定引用，避免每次渲染重建 player
+  const videoInput = useMemo(() => videoUrl ? { uri: videoUrl } : '', [videoUrl]);
+  const player = useVideoPlayer(videoInput, (p) => {
     p.loop = false;
-    console.log('[Player] Player setup callback called');
   });
 
   // videoUrl 变更时手动 replaceAsync + play
   useEffect(() => {
-    if (!player || !videoUrl) {
-      console.log('[Player] useEffect skipped - player:', !!player, 'videoUrl:', videoUrl);
-      return;
-    }
+    if (!player || !videoUrl) return;
 
-    console.log('[Player] videoUrl changed to:', videoUrl);
-    
     const loadVideo = async () => {
       try {
-        console.log('[Player] Calling replaceAsync()...');
         await player.replaceAsync({ uri: videoUrl });
-        console.log('[Player] replaceAsync() completed, calling play()...');
         player.play();
-        console.log('[Player] play() called');
       } catch (e) {
-        console.error('[Player] replaceAsync/play failed:', e.message);
-        // 尝试用 replace 作为备选
         try {
-          console.log('[Player] Trying replace() as fallback...');
           player.replace({ uri: videoUrl });
           player.play();
         } catch (e2) {
-          console.error('[Player] replace fallback also failed:', e2.message);
+          console.error('[Player] replace failed:', e2.message);
         }
       }
     };
@@ -291,26 +313,18 @@ export default function Player({ route }) {
   // statusChange 监听
   useEffect(() => {
     if (!player) return;
-    console.log('[Player] Attaching statusChange listener');
 
     const sub = player.addListener('statusChange', ({ status }) => {
-      console.log('[Player] statusChange:', status);
       if (status === 'readyToPlay') {
-        console.log('[Player] readyToPlay → calling play()');
         player.play();
-      } else if (status === 'error') {
-        console.error('[Player] Player error occurred');
       }
     });
 
-    // 添加 playingChange 监听
-    const playingSub = player.addListener('playingChange', ({ isPlaying }) => {
-      console.log('[Player] playingChange:', isPlaying);
-      setIsPlaying(isPlaying);
+    const playingSub = player.addListener('playingChange', ({ isPlaying: playing }) => {
+      setIsPlaying(playing);
     });
 
     return () => {
-      console.log('[Player] Removing listeners');
       sub.remove();
       playingSub.remove();
     };
@@ -328,6 +342,7 @@ export default function Player({ route }) {
   const subtitlesRef = useRef([]);
   const currentIndexRef = useRef(0);
   const offsetValueRef = useRef(0);
+  const translationAbortRef = useRef(false);
 
   // 同步 subtitles 到 ref
   useEffect(() => { subtitlesRef.current = subtitles; }, [subtitles]);
@@ -352,6 +367,37 @@ export default function Player({ route }) {
     return result;
   }, []);
 
+  // 从指定位置开始向后翻译，跳过已翻译的
+  const startTranslationFromRef = useCallback(async (startIndex) => {
+    // 取消之前的翻译
+    translationAbortRef.current = true;
+    await new Promise(r => setTimeout(r, 50));
+    translationAbortRef.current = false;
+    cancelTranslation();
+
+    resetTranslationCancel();
+    const subs = subtitlesRef.current;
+    for (let i = startIndex; i < subs.length; i++) {
+      if (translationAbortRef.current) break;
+      if (subs[i].zh) continue; // 已翻译，跳过
+      const zh = await translateToChinese(subs[i].text);
+      if (translationAbortRef.current) break;
+      if (zh) {
+        setSubtitles(prev => {
+          const updated = [...prev];
+          updated[i] = { ...updated[i], zh };
+          return updated;
+        });
+        subs[i] = { ...subs[i], zh };
+        // 每翻一条立即存缓存
+        updateCachedSubtitles(videoId, videoSource, subs);
+      }
+      if (i < subs.length - 1 && !translationAbortRef.current) {
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+    }
+  }, [videoId, videoSource]);
+
   const T = THEMES[themeKey];
 
   // 从 API 获取视频 URL 和字幕
@@ -363,32 +409,16 @@ export default function Player({ route }) {
         setLoadingData(true);
         setLoadError(null);
 
-        console.log('[Player] Fetching TED video with id:', videoId, 'slug:', slug);
+        // 先查缓存，命中则跳过网络请求
+        const cachedSubtitles = await getCachedSubtitles(videoId, videoSource);
 
-        // Fetch subtitles and video URL in parallel
-        console.log('[Player] Starting parallel fetch for subtitles and video URL...');
-        const [subResult, videoResult] = await Promise.allSettled([
-          // Subtitles
-          (async () => {
-            console.log('[Player] Fetching subtitles from:', `https://www.ted.com/talks/subtitles/id/${videoId}/lang/en`);
-            const res = await fetch(`https://www.ted.com/talks/subtitles/id/${videoId}/lang/en`);
-            console.log('[Player] Subtitle HTTP status:', res.status);
-            const json = await res.json();
-            console.log('[Player] Subtitle API captions count:', json?.captions?.length);
-            const captions = json?.captions || [];
-            const converted = captions.map((cap, idx) => ({
-              id: idx,
-              start: cap.startTime / 1000,
-              end: (cap.startTime + cap.duration) / 1000,
-              text: cap.content,
-              zh: null,
-            }));
-            console.log('[Player] Converted subtitles:', converted.length);
-            return converted;
-          })(),
-          // Video URL
-          (async () => {
-            console.log('[Player] Fetching video URL via GraphQL...');
+        if (cancelled) return;
+
+        if (cachedSubtitles && cachedSubtitles.length > 0) {
+          setSubtitles(cachedSubtitles);
+          // 只取视频 URL
+          let url = null;
+          try {
             const res = await fetch(TED_GRAPHQL, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -397,7 +427,45 @@ export default function Player({ route }) {
               }),
             });
             const json = await res.json();
-            console.log('[Player] GraphQL response:', JSON.stringify(json).substring(0, 200));
+            const videoNode = json?.data?.video;
+            url = videoNode?.hlsUrl || videoNode?.fallbackUrl || null;
+          } catch (e) {
+            console.error('[Player] Failed to fetch video URL:', e);
+          }
+          if (cancelled) return;
+          if (url) setVideoUrl(url);
+          setLoadingData(false);
+
+          // 从头开始补翻未翻译的字幕
+          startTranslationFromRef(0);
+          return;
+        }
+
+        // 无缓存，从网络获取字幕和视频 URL
+        const [subResult, videoResult] = await Promise.allSettled([
+          // Subtitles
+          (async () => {
+            const res = await fetch(`https://www.ted.com/talks/subtitles/id/${videoId}/lang/en`);
+            const json = await res.json();
+            const captions = json?.captions || [];
+            return captions.map((cap, idx) => ({
+              id: idx,
+              start: cap.startTime / 1000,
+              end: (cap.startTime + cap.duration) / 1000,
+              text: cap.content,
+              zh: null,
+            }));
+          })(),
+          // Video URL
+          (async () => {
+            const res = await fetch(TED_GRAPHQL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                query: `{ video(id: ${videoId}) { id title hlsUrl fallbackUrl } }`,
+              }),
+            });
+            const json = await res.json();
             const videoNode = json?.data?.video;
             return videoNode?.hlsUrl || videoNode?.fallbackUrl || null;
           })(),
@@ -405,56 +473,35 @@ export default function Player({ route }) {
 
         if (cancelled) return;
 
-        // 尝试从缓存获取字幕
-        const cachedSubtitles = await getCachedSubtitles(videoId, videoSource);
-        
-        if (cachedSubtitles && cachedSubtitles.length > 0) {
-          console.log('[Player] Using cached subtitles:', cachedSubtitles.length);
-          setSubtitles(cachedSubtitles);
-        } else if (subResult.status === 'fulfilled' && subResult.value.length > 0) {
-          console.log('[Player] Setting', subResult.value.length, 'subtitles');
+        if (subResult.status === 'fulfilled' && subResult.value.length > 0) {
           // 先设置英文字幕，立即显示
           setSubtitles(subResult.value);
-          
+
           // 缓存英文字幕
           await cacheSubtitles(videoId, videoSource, subResult.value);
-          
+
           // 异步翻译，翻译完一条立即更新
-          console.log('[Player] Starting background translation...');
-          
           translateSubtitles(
             subResult.value,
-            // 翻译完一条的回调
             (index, zh) => {
-              console.log('[Player] Subtitle translated:', index, zh);
               setSubtitles(prev => {
                 const updated = [...prev];
                 updated[index] = { ...updated[index], zh };
                 return updated;
               });
             },
-            // 进度回调（仅日志）
-            (current, total) => {
-              if (current % 10 === 0 || current === total) {
-                console.log(`[Translate] Progress: ${current}/${total}`);
-              }
-            }
+            (current, total) => {}
           ).then((translatedSubs) => {
-            console.log('[Player] Translation completed');
-            // 更新缓存
             updateCachedSubtitles(videoId, videoSource, translatedSubs);
           }).catch((error) => {
-            console.error('[Player] Translation failed:', error);
+            console.error('[Player] Translation failed:', error.message);
           });
         } else {
-          console.error('[Player] Subtitle fetch failed:', subResult.status === 'rejected' ? subResult.reason?.message : 'empty captions');
+          console.error('[Player] Subtitle fetch failed');
         }
 
         if (videoResult.status === 'fulfilled' && videoResult.value) {
-          console.log('[Player] Setting video URL:', videoResult.value);
           setVideoUrl(videoResult.value);
-        } else {
-          console.warn('[Player] Video URL fetch failed:', videoResult.status === 'rejected' ? videoResult.reason?.message : 'no URL');
         }
       } catch (e) {
         if (!cancelled) setLoadError(e.message);
@@ -464,15 +511,17 @@ export default function Player({ route }) {
     };
 
     const fetchYouTubeData = async () => {
-      // YouTube plays via WebView embed — no need to extract video URL
-      // Just finish loading immediately
-      console.log('[Player] YouTube video — will use WebView embed');
+      // YouTube 视频通过 WebView 播放，无需获取额外数据
+      // 确保 videoId 有效即可
+      if (cancelled) return;
+      if (!videoId) {
+        setLoadError('YouTube video ID is missing');
+      }
       setLoadingData(false);
     };
 
     // 如果有 ASR 字幕（从语音转文字过来），直接使用
     if (asrSubtitles && asrSubtitles.length > 0) {
-      console.log(`[Player] Using ASR subtitles: ${asrSubtitles.length} segments`);
       setSubtitles(asrSubtitles);
       setLoadingData(false);
     } else if (videoSource === 'youtube') {
@@ -483,6 +532,7 @@ export default function Player({ route }) {
 
     return () => { 
       cancelled = true;
+      translationAbortRef.current = true;
       cancelTranslation();
     };
   }, [slug, videoId, videoSource, asrSubtitles]);
@@ -626,10 +676,13 @@ export default function Player({ route }) {
     const t = seekPreviewRef.current;
     if (t !== null) {
       playerRef.current?.seekBy(t - currentTimeRef.current);
+      // 从跳转位置开始翻译
+      const idx = findSubtitleIndex(t, offsetValueRef.current);
+      startTranslationFromRef(idx);
       seekToRef.current = null;
     }
     setSeekPreview(null);
-  }, []);
+  }, [findSubtitleIndex, startTranslationFromRef]);
 
   const progressPanResponder = useRef(
     PanResponder.create({
@@ -702,7 +755,9 @@ export default function Player({ route }) {
     player.play();
     setIsUserScrolling(false);
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-  }, [player, markProgrammatic]);
+    // 从跳转位置开始翻译
+    startTranslationFromRef(idx);
+  }, [player, markProgrammatic, startTranslationFromRef]);
 
   // 用户手动滚动处理
   const onScrollBeginDrag = useCallback(() => {
@@ -749,13 +804,15 @@ export default function Player({ route }) {
       const offset = offsetValueRef.current || 0;
       player.currentTime = subtitles[clampedIndex].start - offset;
       player.play();
+      // 从跳转位置开始翻译
+      startTranslationFromRef(clampedIndex);
     }
     
     setTimeout(() => {
       snappingRef.current = false;
       setIsUserScrolling(false);
     }, 300);
-  }, [subtitles, markProgrammatic]);
+  }, [subtitles, markProgrammatic, startTranslationFromRef]);
 
   const onScrollEndDrag = useCallback(() => {
     if (programmaticScroll.current) return;
@@ -842,16 +899,6 @@ export default function Player({ route }) {
     setShowDictationResult(true);
   }, []);
 
-  // 加载中
-  if (loadingData) {
-    return (
-      <View style={[styles.container, { backgroundColor: T.bg, justifyContent: 'center', alignItems: 'center' }]}>
-        <ActivityIndicator size="large" color={T.tabActive} />
-        <Text style={{ marginTop: 16, color: T.subtitleText }}>加载中...</Text>
-      </View>
-    );
-  }
-
   // 错误
   if (loadError) {
     return (
@@ -865,15 +912,53 @@ export default function Player({ route }) {
   return (
     <View style={[styles.container, { backgroundColor: T.bg }]}>
       {/* 视频区域 */}
-      <View style={[styles.videoContainer, { backgroundColor: T.videoBg }]}>
-        {videoSource === 'youtube' ? (
+      <View
+        style={[styles.videoContainer, { backgroundColor: T.videoBg, height: containerWidth > 0 ? containerWidth * 9 / 16 : VIDEO_HEIGHT }]}
+        onLayout={(e) => { const w = e.nativeEvent.layout.width; if (w > 0) setContainerWidth(w); }}
+      >
+        {videoSource === 'youtube' && containerWidth > 0 ? (
           <WebView
-            style={styles.video}
-            source={{ uri: `https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0` }}
+            style={[styles.video, { width: containerWidth }]}
+            source={{
+              html: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%;background:#000;overflow:hidden}iframe{width:100%;height:100%;border:none}</style></head><body><iframe src="https://www.youtube.com/embed/jNQXAC9IVRw?playsinline=1&rel=0&autoplay=1" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe><script>function log(m){try{window.ReactNativeWebView.postMessage(JSON.stringify({log:m}))}catch(e){}}setTimeout(function(){log('outer: '+window.innerWidth+'x'+window.innerHeight);var f=document.querySelector('iframe');if(f)log('iframe: '+f.clientWidth+'x'+f.clientHeight)},2000);<\/script></body></html>`,
+            }}
             allowsFullscreenVideo
+            allowsInlineMediaPlayback
             mediaPlaybackRequiresUserAction={false}
             javaScriptEnabled
             domStorageEnabled
+            mixedContentMode="always"
+            originWhitelist={['*']}
+            injectedJavaScript={`
+              (function() {
+                function log(msg) { try { window.ReactNativeWebView.postMessage(JSON.stringify({log: msg})); } catch(e) {} }
+                function diagnose() {
+                  log('window: ' + window.innerWidth + 'x' + window.innerHeight);
+                  log('documentElement: ' + document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight);
+                  log('body: ' + document.body.clientWidth + 'x' + document.body.clientHeight);
+                  var v = document.querySelector('video');
+                  if (v) {
+                    log('video size: ' + v.clientWidth + 'x' + v.clientHeight + ', readyState=' + v.readyState);
+                    log('video src: ' + (v.src || v.currentSrc || 'none').substring(0, 80));
+                    v.play().catch(function(e){ log('play err: ' + e); });
+                  }
+                  var player = document.querySelector('#movie_player') || document.querySelector('.html5-video-player');
+                  if (player) log('player size: ' + player.clientWidth + 'x' + player.clientHeight);
+                  var container = document.querySelector('.html5-video-container');
+                  if (container) log('video-container size: ' + container.clientWidth + 'x' + container.clientHeight);
+                  var btn = document.querySelector('.ytp-large-play-button');
+                  if (btn) { log('large play btn found, clicking'); btn.click(); }
+                  log('title: ' + (document.title || 'none'));
+                }
+                setTimeout(diagnose, 1000);
+                setTimeout(diagnose, 2000);
+                setTimeout(diagnose, 4000);
+              })();
+              true;
+            `}
+            onMessage={(e) => console.log('[Player][YT]', e.nativeEvent.data)}
+            onLoadEnd={() => console.log('[Player] YouTube embed loaded')}
+            onError={(e) => console.error('[Player] YouTube error:', e.nativeEvent)}
           />
         ) : (
           <>
@@ -997,46 +1082,56 @@ export default function Player({ route }) {
       {/* 字幕区域 */}
       {showSubtitleArea && (
         <View style={[styles.subtitleArea, { backgroundColor: T.subtitleBg }]}>
-          {/* 高亮指示条：前两条跟随字幕移动，第三条起固定 */}
-          <View
-            style={[
-              styles.highlightBar,
-              { backgroundColor: T.highlightBg, borderColor: T.activeBorder },
-              { transform: [{ translateY: (currentIndex < 2 ? currentIndex : 2) * ITEM_HEIGHT }] },
-            ]}
-            pointerEvents="none"
-          />
-          <FlatList
-            ref={flatListRef}
-            data={subtitles}
-            keyExtractor={(item) => String(item.id)}
-            renderItem={({ item }) => (
-              <SubtitleItem
-                item={item}
-                isActive={item.id === subtitles[currentIndex]?.id}
-                theme={T}
-                onPress={onSubtitlePress}
-                practiceMode={practiceMode}
+          {(loadingData || subtitles.length === 0) ? (
+            <View style={{ flex: 1, paddingTop: 8 }}>
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+                <SkeletonSubtitleItem key={i} delay={i * 100} />
+              ))}
+            </View>
+          ) : (
+            <>
+              {/* 高亮指示条：前两条跟随字幕移动，第三条起固定 */}
+              <View
+                style={[
+                  styles.highlightBar,
+                  { backgroundColor: T.highlightBg, borderColor: T.activeBorder },
+                  { transform: [{ translateY: (currentIndex < 2 ? currentIndex : 2) * ITEM_HEIGHT }] },
+                ]}
+                pointerEvents="none"
               />
-            )}
-            getItemLayout={(_, index) => ({
-              length: ITEM_HEIGHT,
-              offset: ITEM_HEIGHT * index,
-              index,
-            })}
-            onScrollToIndexFailed={({ index }) => {
-              flatListRef.current?.scrollToOffset({ offset: index * ITEM_HEIGHT, animated: false });
-            }}
-            onScrollBeginDrag={onScrollBeginDrag}
-            onScrollEndDrag={onScrollEndDrag}
-            onMomentumScrollBegin={onMomentumScrollBegin}
-            onMomentumScrollEnd={onMomentumScrollEnd}
-            onScroll={onScroll}
-            scrollEventThrottle={16}
-            showsVerticalScrollIndicator={false}
-            ListHeaderComponent={<View style={{ height: 8 }} />}
-            ListFooterComponent={<View style={{ height: 400 }} />}
-          />
+              <FlatList
+                ref={flatListRef}
+                data={subtitles}
+                keyExtractor={(item) => String(item.id)}
+                renderItem={({ item }) => (
+                  <SubtitleItem
+                    item={item}
+                    isActive={item.id === subtitles[currentIndex]?.id}
+                    theme={T}
+                    onPress={onSubtitlePress}
+                    practiceMode={practiceMode}
+                  />
+                )}
+                getItemLayout={(_, index) => ({
+                  length: ITEM_HEIGHT,
+                  offset: ITEM_HEIGHT * index,
+                  index,
+                })}
+                onScrollToIndexFailed={({ index }) => {
+                  flatListRef.current?.scrollToOffset({ offset: index * ITEM_HEIGHT, animated: false });
+                }}
+                onScrollBeginDrag={onScrollBeginDrag}
+                onScrollEndDrag={onScrollEndDrag}
+                onMomentumScrollBegin={onMomentumScrollBegin}
+                onMomentumScrollEnd={onMomentumScrollEnd}
+                onScroll={onScroll}
+                scrollEventThrottle={16}
+                showsVerticalScrollIndicator={false}
+                ListHeaderComponent={<View style={{ height: 8 }} />}
+                ListFooterComponent={<View style={{ height: 400 }} />}
+              />
+            </>
+          )}
         </View>
       )}
     </View>

@@ -328,12 +328,12 @@ export default function LibraryScreen({ navigation }) {
   ), [onPressVideo]);
 
   const renderHeader = () => (
-    <View style={styles.header}>
+    <View style={[styles.header, { backgroundColor: theme.headerBg }]}>
       {source !== 'history' && (
-        <View style={styles.searchContainer}>
-          <TextInput style={styles.searchInput}
+        <View style={[styles.searchContainer, { backgroundColor: theme.searchBg }]}>
+          <TextInput style={[styles.searchInput, { color: theme.text }]}
             placeholder={source === 'ted' ? 'Search TED or paste link' : 'Search YouTube or paste link'}
-            placeholderTextColor="rgba(255,255,255,0.5)" value={searchText} onChangeText={onSearchTextChange} returnKeyType="search" />
+            placeholderTextColor={theme.textMuted} value={searchText} onChangeText={onSearchTextChange} returnKeyType="search" />
           {searchText.length > 0 && (
             <TouchableOpacity style={styles.clearBtn} onPress={() => onSearchTextChange('')}>
               <Text style={styles.clearBtnText}>✕</Text>
@@ -343,9 +343,9 @@ export default function LibraryScreen({ navigation }) {
       )}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.sourceTabs}>
         {SOURCE_TABS.map((tab) => (
-          <TouchableOpacity key={tab.key} style={[styles.sourceTab, source === tab.key && styles.sourceTabActive]}
+          <TouchableOpacity key={tab.key} style={[styles.sourceTab, { backgroundColor: source === tab.key ? theme.pillActiveBg : theme.pillBg }]}
             onPress={() => { setSource(tab.key); setSearchText(''); setError(null); }} activeOpacity={0.7}>
-            <Text style={[styles.sourceTabText, source === tab.key && styles.sourceTabTextActive]}>{tab.label}</Text>
+            <Text style={[styles.sourceTabText, { color: source === tab.key ? theme.text : theme.textMuted }]}>{tab.label}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -365,13 +365,13 @@ export default function LibraryScreen({ navigation }) {
 
   if (source === 'history') {
     return (
-      <SafeAreaView style={styles.container} edges={['top']}>
+      <SafeAreaView style={[styles.container, { backgroundColor: theme.bg }]} edges={['top']}>
         {renderHeader()}
         {lessons.length === 0 ? (
           <View style={styles.centerContent}>
             <Text style={styles.emptyIcon}>📚</Text>
-            <Text style={styles.emptyText}>No lessons yet</Text>
-            <Text style={styles.emptySubtext}>Paste a video link or browse to start learning</Text>
+            <Text style={[styles.emptyText, { color: theme.textMuted }]}>No lessons yet</Text>
+            <Text style={[styles.emptySubtext, { color: theme.textDim }]}>Paste a video link or browse to start learning</Text>
           </View>
         ) : (
           <FlatList data={lessons} renderItem={renderLessonCard} keyExtractor={(item) => item.id}
@@ -383,10 +383,10 @@ export default function LibraryScreen({ navigation }) {
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.container} edges={['top']}>
+      <SafeAreaView style={[styles.container, { backgroundColor: theme.bg }]} edges={['top']}>
         {renderHeader()}
         <View style={styles.centerContent}>
-          <ActivityIndicator size="large" color="#3B82F6" />
+          <ActivityIndicator size="large" color={theme.accent} />
           <Text style={styles.loadingText}>Loading...</Text>
         </View>
       </SafeAreaView>
@@ -395,11 +395,11 @@ export default function LibraryScreen({ navigation }) {
 
   if (error) {
     return (
-      <SafeAreaView style={styles.container} edges={['top']}>
+      <SafeAreaView style={[styles.container, { backgroundColor: theme.bg }]} edges={['top']}>
         {renderHeader()}
         <View style={styles.centerContent}>
           <Text style={styles.errorText}>Load failed</Text>
-          <Text style={styles.errorDetail}>{error}</Text>
+          <Text style={[styles.errorDetail, { color: theme.textMuted }]}>{error}</Text>
           <TouchableOpacity style={styles.retryBtn} onPress={() => {
             if (source === 'ted') fetchTedVideos();
             else if (searchText.trim()) fetchYouTubeSearch(searchText.trim());
@@ -413,12 +413,12 @@ export default function LibraryScreen({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.bg }]} edges={['top']}>
       {renderHeader()}
       <FlatList data={filteredVideos} renderItem={renderVideoCard} keyExtractor={(item) => String(item.id)}
         numColumns={2} columnWrapperStyle={styles.row} contentContainerStyle={styles.listContent}
         ListEmptyComponent={!searchLoading ? (
-          <View style={styles.centerContent}><Text style={styles.emptyText}>{searchText.trim() ? 'No results' : 'No videos'}</Text></View>
+          <View style={styles.centerContent}><Text style={[styles.emptyText, { color: theme.textMuted }]}>{searchText.trim() ? 'No results' : 'No videos'}</Text></View>
         ) : null}
         showsVerticalScrollIndicator={false} />
     </SafeAreaView>
@@ -426,15 +426,13 @@ export default function LibraryScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0A0A0A' },
-  header: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 12, backgroundColor: '#0A0A0A' },
+  container: { flex: 1 },
+  header: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 12 },
   sourceTabs: { flexDirection: 'row', gap: 8, marginTop: 12 },
-  sourceTab: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.06)' },
-  sourceTabActive: { backgroundColor: 'rgba(255,255,255,0.15)' },
-  sourceTabText: { fontSize: 14, fontWeight: '600', color: 'rgba(255,255,255,0.6)' },
-  sourceTabTextActive: { color: '#FFFFFF' },
-  searchContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderRadius: 12, paddingHorizontal: 14, height: 40 },
-  searchInput: { flex: 1, fontSize: 15, color: '#FFFFFF' },
+  sourceTab: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20 },
+  sourceTabText: { fontSize: 14, fontWeight: '600' },
+  searchContainer: { flexDirection: 'row', alignItems: 'center', borderRadius: 12, paddingHorizontal: 14, height: 40 },
+  searchInput: { flex: 1, fontSize: 15 },
   clearBtn: { width: 20, height: 20, borderRadius: 10, backgroundColor: 'rgba(255,255,255,0.2)', alignItems: 'center', justifyContent: 'center', marginLeft: 8 },
   clearBtnText: { fontSize: 10, color: 'rgba(255,255,255,0.7)' },
   transcribeBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#10B981', borderRadius: 12, paddingVertical: 10, paddingHorizontal: 20, marginTop: 10 },

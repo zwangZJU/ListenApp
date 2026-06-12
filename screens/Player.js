@@ -192,25 +192,28 @@ const SubtitleItem = React.memo(({ item, isActive, theme, onPress, practiceMode 
       activeOpacity={0.7}
     >
       <View style={styles.subtitleContent}>
-        {practiceMode === 'listen-only' ? (
+        {isActive ? (
+          // 活跃条：不显示文字，由高亮块覆盖显示
+          <View style={{ height: 24 }} />
+        ) : practiceMode === 'listen-only' ? (
           <ScrollView horizontal showsHorizontalScrollIndicator={false} bounces={false} contentContainerStyle={styles.scrollContent}>
-            <Text style={[styles.subtitleTextEn, { color: isActive ? T.subtitleTextActive : T.subtitleText }, isActive && styles.subtitleTextActive]}>
+            <Text style={[styles.subtitleTextEn, { color: T.subtitleText }]}>
               {'• • •'}
             </Text>
           </ScrollView>
         ) : (
           <ScrollView horizontal showsHorizontalScrollIndicator={false} bounces={false} contentContainerStyle={styles.scrollContent}>
-            <Text style={[styles.subtitleTextEn, { color: isActive ? T.subtitleTextActive : T.subtitleText }, isActive && styles.subtitleTextActive]}>
+            <Text style={[styles.subtitleTextEn, { color: T.subtitleText }]}>
               {item.text.replace(/\n/g, ' ')}
             </Text>
           </ScrollView>
         )}
-        {item.zh && (
+        {!isActive && item.zh && (
           <ScrollView horizontal showsHorizontalScrollIndicator={false} bounces={false} contentContainerStyle={styles.scrollContent}>
             <Text
               style={[
                 styles.subtitleTextZh,
-                { color: isActive ? T.zhTextActive : T.zhText },
+                { color: T.zhText },
               ]}
             >
               {item.zh.replace(/\n/g, ' ')}
@@ -1111,7 +1114,7 @@ export default function Player({ route }) {
                 pointerEvents="none"
               >
                 {subtitles[currentIndex] && (
-                  <View style={{ flex: 1, paddingHorizontal: 8, paddingVertical: 6, justifyContent: 'center' }}>
+                  <View style={{ flex: 1, paddingHorizontal: 12, paddingVertical: 8, justifyContent: 'center' }}>
                     {practiceMode !== 'listen-only' ? (
                       <Text style={[styles.subtitleTextEn, { color: T.subtitleTextActive, fontWeight: '600' }]} numberOfLines={2}>
                         {subtitles[currentIndex].text.replace(/\n/g, ' ')}

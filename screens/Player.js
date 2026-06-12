@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   Dimensions,
   PanResponder,
-  FlatList,
   Animated,
-  ActivityIndicator,
-  TextInput,
   ScrollView,
+  LayoutAnimation,
+  UIManager,
+  Platform,
 } from 'react-native';
 import { VideoView, useVideoPlayer } from 'expo-video';
 import { Ionicons } from '@expo/vector-icons';
@@ -28,11 +28,15 @@ const VIDEO_HEIGHT = (SCREEN_WIDTH > 0 ? SCREEN_WIDTH : 400) * 9 / 16; // 16:9 a
 const SUBTITLE_AREA_HEIGHT = SCREEN_HEIGHT - VIDEO_HEIGHT - 200;
 const ITEM_HEIGHT = 72;
 const EXPANDED_HEIGHT = 120;
-const CENTER_OFFSET = (SUBTITLE_AREA_HEIGHT / 2) - (ITEM_HEIGHT / 2);
 const SLIDER_PADDING = 16;
 const SLIDER_WIDTH = SCREEN_WIDTH - SLIDER_PADDING * 2;
 const OFFSET_MIN = -10;
 const OFFSET_MAX = 10;
+
+// Android 需要启用 LayoutAnimation
+if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 const OFFSET_RANGE = OFFSET_MAX - OFFSET_MIN;
 
 // Skeleton 骨架屏组件
@@ -180,45 +184,44 @@ function parseCaptionText(text) {
 
 // ====== 字幕组件 ======
 
-const SubtitleItem = React.memo(({ item, isActive, theme, onPress, practiceMode }) => {
+const SubtitleItem = React.memo(({ item, isActive, theme, onPress, practiceMode, index }) => {
   const T = theme;
   return (
     <TouchableOpacity
-      style={[
-        styles.subtitleItem,
-        isActive && { borderLeftColor: T.activeBorder, zIndex: 0 },
-      ]}
+      style={{
+        minHeight: isActive ? EXPANDED_HEIGHT : ITEM_HEIGHT,
+        flexDirection: 'row',
+        paddingHorizontal: 16,
+        paddingVertical: isActive ? 14 : 12,
+        borderLeftWidth: 3,
+        borderLeftColor: isActive ? T.activeBorder : 'transparent',
+        backgroundColor: isActive ? T.highlightBg : 'transparent',
+        borderRadius: isActive ? 10 : 0,
+        marginHorizontal: isActive ? 4 : 0,
+      }}
       onPress={() => onPress(item)}
       activeOpacity={0.7}
     >
-      <View style={styles.subtitleContent}>
-        {isActive ? (
-          // 活跃条：不显示文字，由高亮块覆盖显示
-          <View style={{ height: 24 }} />
-        ) : practiceMode === 'listen-only' ? (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} bounces={false} contentContainerStyle={styles.scrollContent}>
-            <Text style={[styles.subtitleTextEn, { color: T.subtitleText }]}>
-              {'• • •'}
-            </Text>
-          </ScrollView>
+      <View style={{ flex: 1, marginRight: 12 }}>
+        {practiceMode === 'listen-only' ? (
+          <Text style={[styles.subtitleTextEn, { color: isActive ? T.subtitleTextActive : T.subtitleText }, isActive && styles.subtitleTextActive]} numberOfLines={isActive ? 2 : 1}>
+            {'• • •'}
+          </Text>
         ) : (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} bounces={false} contentContainerStyle={styles.scrollContent}>
-            <Text style={[styles.subtitleTextEn, { color: T.subtitleText }]}>
-              {item.text.replace(/\n/g, ' ')}
-            </Text>
-          </ScrollView>
+          <Text style={[styles.subtitleTextEn, { color: isActive ? T.subtitleTextActive : T.subtitleText }, isActive && styles.subtitleTextActive]} numberOfLines={isActive ? 2 : 1}>
+            {item.text.replace(/\n/g, ' ')}
+          </Text>
         )}
-        {!isActive && item.zh && (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} bounces={false} contentContainerStyle={styles.scrollContent}>
-            <Text
-              style={[
-                styles.subtitleTextZh,
-                { color: T.zhText },
-              ]}
-            >
-              {item.zh.replace(/\n/g, ' ')}
-            </Text>
-          </ScrollView>
+        {item.zh && (
+          <Text
+            style={[
+              styles.subtitleTextZh,
+              { color: isActive ? T.zhTextActive : T.zhText },
+            ]}
+            numberOfLines={isActive ? 2 : 1}
+          >
+            {item.zh.replace(/\n/g, ' ')}
+          </Text>
         )}
       </View>
       <Text style={[styles.subtitleTime, { color: T.timeText }]}>
@@ -253,8 +256,7 @@ export default function Player({ route }) {
   const [containerWidth, setContainerWidth] = useState(0);
   const [subtitle, setSubtitle] = useState('');
   const [zhSubtitle, setZhSubtitle] = useState('');
-  const [isUserScrolling, setIsUserScrolling] = useState(false);
-  const [practiceMode, setPracticeMode] = useState('normal');
+  const [practiceMode
   const [dictationItems, setDictationItems] = useState([]);
   const [dictationInputs, setDictationInputs] = useState({});
   const [showDictationResult, setShowDictationResult] = useState(false);
@@ -265,29 +267,13 @@ export default function Player({ route }) {
   const sessionStartRef = useRef(Date.now());
 
   // Refs
-  const flatListRef = useRef(null);
-  const programmaticScroll = useRef(false);
-  const programmaticTimer = useRef(null);
-  const lastScrollTime = useRef(0);
+
   const isDraggingRef = useRef(false);
   const seekPreviewRef = useRef(null);
   const offsetTimer = useRef(null);
   const offsetDragging = useRef(false);
-  const scrollTimeout = useRef(null);
-  const snappingRef = useRef(false);
-  const scrollYRef = useRef(0);
-  const userScrollTimeout = useRef(null);
 
-  // 标记程序滚动
-  const markProgrammatic = useCallback(() => {
-    programmaticScroll.current = true;
-    if (programmaticTimer.current) clearTimeout(programmaticTimer.current);
-    programmaticTimer.current = setTimeout(() => {
-      programmaticScroll.current = false;
-    }, 500);
-  }, []);
 
-  // 创建播放器 - 用 useMemo 稳定引用，避免每次渲染重建 player
   const videoInput = useMemo(() => videoUrl ? { uri: videoUrl } : '', [videoUrl]);
   const player = useVideoPlayer(videoInput, (p) => {
     p.loop = false;
@@ -347,7 +333,10 @@ export default function Player({ route }) {
   const currentIndexRef = useRef(0);
   const offsetValueRef = useRef(0);
   const translationAbortRef = useRef(false);
-  const highlightHeight = useRef(new Animated.Value(EXPANDED_HEIGHT)).current;
+  const subtitleScrollRef = useRef(null);
+  const subtitleScrollY = useRef(0);
+  const isSubtitleDragging = useRef(false);
+  const subtitleDragTimeout = useRef(null);
 
   // 同步 subtitles 到 ref
   useEffect(() => { subtitlesRef.current = subtitles; }, [subtitles]);
@@ -355,14 +344,26 @@ export default function Player({ route }) {
   // 同步 offsetValue 到 ref
   useEffect(() => { offsetValueRef.current = offsetValue; }, [offsetValue]);
 
-  // 高亮块高度：始终展开
+  // 字幕切换时：LayoutAnimation 弹性展开 + 自动滚动到中心
   useEffect(() => {
-    Animated.timing(highlightHeight, {
-      toValue: EXPANDED_HEIGHT,
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-  }, [currentIndex, highlightHeight]);
+    if (subtitles.length === 0) return;
+    LayoutAnimation.configureNext(LayoutAnimation.create(
+      250,
+      LayoutAnimation.Types.easeInEaseOut,
+      LayoutAnimation.Properties.scaleY,
+    ));
+    // 自动滚动到当前字幕
+    if (!isSubtitleDragging.current && subtitleScrollRef.current) {
+      const idx = currentIndex;
+      const itemTop = idx * ITEM_HEIGHT + Math.max(0, idx - 1) * (EXPANDED_HEIGHT - ITEM_HEIGHT);
+      const itemHeight = idx === currentIndex ? EXPANDED_HEIGHT : ITEM_HEIGHT;
+      const containerH = SUBTITLE_AREA_HEIGHT;
+      const targetY = Math.max(0, itemTop + itemHeight / 2 - containerH / 2);
+      setTimeout(() => {
+        subtitleScrollRef.current?.scrollTo({ y: targetY, animated: true });
+      }, 50);
+    }
+  }, [currentIndex, subtitles.length]);
 
   // 二分搜索：找到当前时间对应的字幕索引
   const findSubtitleIndex = useCallback((time, offset) => {
@@ -757,111 +758,14 @@ export default function Player({ route }) {
   const onSubtitlePress = useCallback((item) => {
     if (!player) return;
     const idx = item.id;
-    // 滚动到点击的字幕
-    const scrollY = idx < 2 ? 0 : (idx - 2) * ITEM_HEIGHT;
-    markProgrammatic();
-    flatListRef.current?.scrollToOffset({ offset: scrollY, animated: true });
     setCurrentIndex(idx);
     currentIndexRef.current = idx;
-    // 减去偏移量，确保播放的是点击的那条字幕
     const offset = offsetValueRef.current || 0;
     player.currentTime = item.start - offset;
     player.play();
-    setIsUserScrolling(false);
-    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     // 从跳转位置开始翻译
     startTranslationFromRef(idx);
-  }, [player, markProgrammatic, startTranslationFromRef]);
-
-  // 用户手动滚动处理
-  const onScrollBeginDrag = useCallback(() => {
-    if (programmaticScroll.current) return;
-    setIsUserScrolling(true);
-    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-    if (snappingRef.current) return;
-    if (player?.playing) player.pause();
-  }, [player]);
-
-  const onScroll = useCallback((e) => {
-    scrollYRef.current = e.nativeEvent.contentOffset.y;
-  }, []);
-
-  const snapToNearest = useCallback(() => {
-    if (snappingRef.current) return;
-    snappingRef.current = true;
-
-    // 磁吸：基于高亮条的视觉位置，找到最近的字幕索引
-    const curIdx = currentIndexRef.current;
-    const barVisualY = curIdx < 2
-      ? 8 + curIdx * ITEM_HEIGHT
-      : 8 + 2 * ITEM_HEIGHT;
-    const snapIndex = Math.round((barVisualY + scrollYRef.current - 8) / ITEM_HEIGHT);
-    const clampedIndex = Math.max(0, Math.min(subtitles.length - 1, snapIndex));
-
-    // 滚动到吸附位置
-    markProgrammatic();
-    if (clampedIndex < 2) {
-      flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
-    } else {
-      // 使用 scrollToOffset 确保滚动距离是 ITEM_HEIGHT 的整数倍
-      const offset = Math.max(0, (clampedIndex - 2) * ITEM_HEIGHT);
-      flatListRef.current?.scrollToOffset({ offset, animated: true });
-    }
-
-    // 更新高亮索引，恢复自动滚动
-    setCurrentIndex(clampedIndex);
-    currentIndexRef.current = clampedIndex;
-    
-    // 让播放器从磁吸到的字幕开始播放
-    if (player && subtitles[clampedIndex]) {
-      // 减去偏移量，确保播放的是滑到的那条字幕
-      const offset = offsetValueRef.current || 0;
-      player.currentTime = subtitles[clampedIndex].start - offset;
-      player.play();
-      // 从跳转位置开始翻译
-      startTranslationFromRef(clampedIndex);
-    }
-    
-    setTimeout(() => {
-      snappingRef.current = false;
-      setIsUserScrolling(false);
-    }, 300);
-  }, [subtitles, markProgrammatic, startTranslationFromRef]);
-
-  const onScrollEndDrag = useCallback(() => {
-    if (programmaticScroll.current) return;
-    scrollTimeout.current = setTimeout(() => {
-      snapToNearest();
-    }, 100);
-    // 安全兜底：若 momentumScrollEnd 未触发，3秒后恢复自动滚动
-    if (userScrollTimeout.current) clearTimeout(userScrollTimeout.current);
-    userScrollTimeout.current = setTimeout(() => {
-      setIsUserScrolling(false);
-    }, 3000);
-  }, [snapToNearest]);
-
-  const onMomentumScrollBegin = useCallback(() => {
-    if (programmaticScroll.current) return;
-    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-  }, []);
-
-  const onMomentumScrollEnd = useCallback(() => {
-    if (programmaticScroll.current) return;
-    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-    snapToNearest();
-  }, [snapToNearest]);
-
-  // 字幕切换时自动滚动：前两条高亮块移动，第三条起列表滚动
-  useEffect(() => {
-    if (isUserScrolling || snappingRef.current || subtitles.length === 0) return;
-    const idx = currentIndexRef.current;
-    if (idx < 2) return; // 前两条不需要滚动列表
-
-    markProgrammatic();
-    // 使用 scrollToOffset 确保滚动距离是 ITEM_HEIGHT 的整数倍
-    const offset = Math.max(0, (idx - 2) * ITEM_HEIGHT);
-    flatListRef.current?.scrollToOffset({ offset, animated: false });
-  }, [currentIndex, isUserScrolling, markProgrammatic, subtitles.length]);
+  }, [player, startTranslationFromRef]);
 
   // Load review queue on mount
   useEffect(() => {
@@ -1103,67 +1007,34 @@ export default function Player({ route }) {
               ))}
             </View>
           ) : (
-            <>
-              {/* 高亮指示条：展开时变高 */}
-              <Animated.View
-                style={[
-                  styles.highlightBar,
-                  { backgroundColor: T.highlightBg, borderColor: T.activeBorder },
-                  { height: highlightHeight, transform: [{ translateY: (currentIndex < 2 ? currentIndex : 2) * ITEM_HEIGHT }] },
-                ]}
-                pointerEvents="none"
-              >
-                {subtitles[currentIndex] && (
-                  <View style={{ flex: 1, paddingHorizontal: 12, paddingVertical: 8, justifyContent: 'center' }}>
-                    {practiceMode !== 'listen-only' ? (
-                      <Text style={[styles.subtitleTextEn, { color: T.subtitleTextActive, fontWeight: '600' }]} numberOfLines={2}>
-                        {subtitles[currentIndex].text.replace(/\n/g, ' ')}
-                      </Text>
-                    ) : (
-                      <Text style={[styles.subtitleTextEn, { color: T.subtitleTextActive, fontWeight: '600' }]}>
-                        {'• • •'}
-                      </Text>
-                    )}
-                    {subtitles[currentIndex].zh && (
-                      <Text style={[styles.subtitleTextZh, { color: T.zhTextActive }]} numberOfLines={2}>
-                        {subtitles[currentIndex].zh.replace(/\n/g, ' ')}
-                      </Text>
-                    )}
-                  </View>
-                )}
-              </Animated.View>
-              <FlatList
-                ref={flatListRef}
-                data={subtitles}
-                keyExtractor={(item) => String(item.id)}
-                renderItem={({ item }) => (
-                  <SubtitleItem
-                    item={item}
-                    isActive={item.id === subtitles[currentIndex]?.id}
-                    theme={T}
-                    onPress={onSubtitlePress}
-                    practiceMode={practiceMode}
-                  />
-                )}
-                getItemLayout={(_, index) => ({
-                  length: ITEM_HEIGHT,
-                  offset: ITEM_HEIGHT * index,
-                  index,
-                })}
-                onScrollToIndexFailed={({ index }) => {
-                  flatListRef.current?.scrollToOffset({ offset: index * ITEM_HEIGHT, animated: false });
-                }}
-                onScrollBeginDrag={onScrollBeginDrag}
-                onScrollEndDrag={onScrollEndDrag}
-                onMomentumScrollBegin={onMomentumScrollBegin}
-                onMomentumScrollEnd={onMomentumScrollEnd}
-                onScroll={onScroll}
-                scrollEventThrottle={16}
-                showsVerticalScrollIndicator={false}
-                ListHeaderComponent={<View style={{ height: 8 }} />}
-                ListFooterComponent={<View style={{ height: 400 }} />}
-              />
-            </>
+            <ScrollView
+              ref={subtitleScrollRef}
+              showsVerticalScrollIndicator={false}
+              scrollEventThrottle={16}
+              onScrollBeginDrag={() => {
+                isSubtitleDragging.current = true;
+                if (subtitleDragTimeout.current) clearTimeout(subtitleDragTimeout.current);
+              }}
+              onScrollEndDrag={() => {
+                subtitleDragTimeout.current = setTimeout(() => {
+                  isSubtitleDragging.current = false;
+                }, 3000);
+              }}
+              contentContainerStyle={{ paddingVertical: 8 }}
+            >
+              {subtitles.map((item, index) => (
+                <SubtitleItem
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  isActive={index === currentIndex}
+                  theme={T}
+                  onPress={onSubtitlePress}
+                  practiceMode={practiceMode}
+                />
+              ))}
+              <View style={{ height: 400 }} />
+            </ScrollView>
           )}
         </View>
       )}
